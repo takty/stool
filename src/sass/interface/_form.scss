@@ -1,0 +1,58 @@
+/**
+ *
+ * Form Styles
+ *
+ * @author Takuto Yanagida @ Space-Time Inc.
+ * @version 2018-01-11
+ *
+ */
+
+
+@charset 'utf-8';
+
+
+@mixin form-clear-appearance() {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	&::-ms-expand { display: none; }
+	border: none;
+	border-radius: inherit;
+}
+
+@mixin form-selector-label($size, $color, $right) {
+	position: relative;
+
+	&::before, &::after {
+		content: '';
+		display: block;
+		position: absolute;
+		border: #{$size / 3} solid transparent;
+		transition: all 0.2s ease;
+		pointer-events: none;
+
+		top: 50%;
+		right: $right;
+	}
+	&::before {
+		border-top-color: $color;
+		transform: translate(50%, 40%) scale(0.65, 1) translate(0, -25%) ;
+		top: 50%;
+	}
+	&::after {
+		border-bottom-color: $color;
+		transform: translate(50%, -40%) scale(0.65, 1) translate(0, -75%) ;
+		top: 50%;
+	}
+	&:hover {
+		transition: all 0.2s ease;
+		&::before {
+			transition: all 0.2s ease;
+			transform: translate(50%, -60%) scale(0.65, -1) translate(0, -25%) ;
+		}
+		&::after {
+			transition: all 0.2s ease;
+			transform: translate(50%, -140%) scale(0.65, -1) translate(0, -75%) ;
+		}
+	}
+}

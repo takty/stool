@@ -1,0 +1,96 @@
+/**
+ *
+ * Fill Styles
+ *
+ * @author Takuto Yanagida @ Space-Time Inc.
+ * @version 2018-01-11
+ *
+ */
+
+
+@charset 'utf-8';
+
+
+@mixin fill-full-width-strip($color) {
+	background-color: $color;
+	box-shadow: -33vw 0 0 $color, 33vw 0 0 $color;
+
+	// for avoiding that lines are shown at the edge of box element on IE 11
+	@media all and (-ms-high-contrast: none) {
+		position: relative;
+		&::after {
+			content: '';
+			position: absolute;
+			left: -100vw;
+			width: 200vw;
+			top: 0;
+			bottom: 0;
+			background-color: $color;
+			z-index: -1;
+		}
+	}
+}
+
+@mixin fill-ken-burns($scale: 1.4, $time: 40s, $cover_color: transparent) {
+	overflow: hidden;
+
+	&::before, &::after {
+		content: '';
+		display: block;
+		@include layout-fill(absolute);
+	}
+	&::before {
+		background-size: cover;
+		background-position: center center;
+
+		animation-name: zoom;
+		animation-delay: 0.4s;
+		animation-duration: $time;
+		animation-timing-function: ease-in-out;
+		animation-fill-mode: forwards;
+	}
+	&::after {
+		background-color: $cover_color;
+	}
+
+	@keyframes zoom {
+		0%   { transform: scale(1, 1); }
+		100% { transform: scale($scale, $scale); }
+	}
+
+}
+
+
+// -----------------------------------------------------------------------------
+
+
+@mixin fill-stripe($color_bg, $color_stripe, $size, $deg: 0deg, $rate: 25%) {
+	$tr: 50% - $rate;
+	background-size: $size $size;
+	background-color: $color_bg;
+	background-repeat: repeat;
+	background-image: linear-gradient($deg,
+		$color_stripe $rate, transparent $rate,
+		transparent #{$rate + $tr}, $color_stripe #{$rate + $tr},
+		$color_stripe #{$rate + $tr + $rate}, transparent #{$rate + $tr + $rate},
+		transparent
+	);
+}
+
+@mixin fill-dot-pattern-1($color_bg, $color_dot, $pattern_size: 40px, $dot_rate: 15%) {
+	background-size: $pattern_size $pattern_size;
+	background-color: $color_bg;
+	background-repeat: repeat;
+	background-position: 0 0;
+	background-image: radial-gradient($color_dot $dot_rate, transparent #{$dot_rate + 1});
+}
+
+@mixin fill-dot-pattern-2($color_bg, $color_dot, $pattern_size: 40px, $dot_rate: 15%) {
+	background-size: $pattern_size $pattern_size;
+	background-color: $color_bg;
+	background-repeat: repeat;
+	background-position: 0 0, #{$pattern_size / 2} #{$pattern_size / 2};
+	background-image:
+		radial-gradient($color_dot $dot_rate, transparent #{$dot_rate + 1}),
+		radial-gradient($color_dot $dot_rate, transparent #{$dot_rate + 1});
+}

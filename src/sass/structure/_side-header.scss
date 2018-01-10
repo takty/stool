@@ -1,0 +1,68 @@
+/**
+ *
+ * Side Header (SCSS)
+ *
+ * @author Takuto Yanagida @ Space-Time Inc.
+ * @version 2018-01-01
+ *
+ * @import 'lib/stile/sass/basic/query';
+ *
+ */
+
+@charset 'utf-8';
+
+
+$side-header-size-text-width            : 48rem !default;
+$side-header-size-horizontal-margin     : 2rem !default;
+$side-header-size-vertical-margin       : 2rem !default;
+$side-header-size-vertical-margin-phone : 1rem !default;
+$side-header-size-vertical-padding      : 2rem !default;
+$side-header-size-vertical-padding-phone: 1rem !default;
+
+
+.st-side-header-entry {
+	position: relative;
+	@include for-desktop-up { display: flex; }
+}
+
+.st-side-header-entry-header,
+.st-side-header-entry-content {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: $side-header-size-text-width;
+	width: 100%;
+}
+
+.st-side-header-entry-header {
+	flex-grow: 1;
+
+	@include for-phone-only  { padding-top: $side-header-size-vertical-padding-phone; }
+	@include for-tablet-only { padding-top: $side-header-size-vertical-padding; }
+	@include for-desktop-up  { padding:     $side-header-size-vertical-padding 0; }
+
+	.st-side-header-entry.top & {
+		position: absolute;
+		top: 0;
+	}
+	.st-side-header-entry.fixed & {
+		position: fixed;
+	}
+	.st-side-header-entry.bottom & {
+		position: absolute;
+		bottom: 0;
+	}
+}
+
+.st-side-header-entry-content {
+	flex-shrink: 0;
+
+	@include for-phone-only  { padding-bottom: $side-header-size-vertical-padding-phone; }
+	@include for-tablet-only { padding-bottom: $side-header-size-vertical-padding; }
+	@include for-desktop-up  { padding:        $side-header-size-vertical-padding 0; }
+
+	.st-side-header-entry > *:first-child + & {
+		@include for-phone-only  { margin-top:  $side-header-size-vertical-margin-phone; }
+		@include for-tablet-only { margin-top:  $side-header-size-vertical-margin; }
+		@include for-desktop-up  { margin-left: $side-header-size-horizontal-margin; }
+	}
+}

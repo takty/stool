@@ -1,0 +1,60 @@
+/**
+ *
+ * Hover Styles
+ *
+ * @author Takuto Yanagida @ Space-Time Inc.
+ * @version 2018-01-11
+ *
+ */
+
+
+@charset 'utf-8';
+
+
+@mixin hover-transition($prop: all, $time: 0.2s, $type: ease) {
+	transition: $prop $time $type;
+	&::before, &::after {
+		transition: $prop $time $type;
+	}
+	&:hover {
+		transition: $prop $time $type;
+		&::before, &::after { transition: $prop $time $type; }
+	}
+}
+
+@mixin hover-pop($color, $width: 2px, $delta: 1px) {
+	@include decoration-hover-transition();
+	position: relative;
+	&:hover {
+		top: -#{$delta};
+		border-bottom: $width solid $color;
+	}
+}
+
+@mixin hover-flash($pseudo: after) {
+	&:hover {
+		position: relative;
+		overflow: hidden;
+
+		&::#{$pseudo} {
+			content: '';
+			display: block;
+			position: absolute;
+			left: -200%;
+			top: 50%;
+			width: 100%;
+			padding-bottom: 400%;
+			background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0) 100%);
+			transform: translate(-50%, -50%) rotate(45deg);
+			animation: glow 0.75s 1 0s;
+			animation-timing-function: linear;
+			pointer-events: none;
+		}
+	}
+
+	@keyframes glow {
+		0% { left: -200%; }
+		50% { left: 0%; }
+		100% { left: 200%; }
+	}
+}

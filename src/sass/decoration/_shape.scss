@@ -1,0 +1,121 @@
+/**
+ *
+ * Shape Styles
+ *
+ * @author Takuto Yanagida @ Space-Time Inc.
+ * @version 2018-01-11
+ *
+ */
+
+
+@charset 'utf-8';
+
+
+@mixin shape-triangle($color, $dir, $size) {
+	width: 0;
+	height: 0;
+	border: $size solid transparent;
+
+	$d: left;
+	@if     $dir == top    { $d: bottom; }
+	@elseif $dir == left   { $d: right;  }
+	@elseif $dir == right  { $d: left;   }
+	@elseif $dir == bottom { $d: top;    }
+
+	border-#{$d}: $size solid $color;
+}
+
+@mixin shape-triangle-color($color, $dir) {
+	$d: left;
+	@if     $dir == top    { $d: bottom; }
+	@elseif $dir == left   { $d: right;  }
+	@elseif $dir == right  { $d: left;   }
+	@elseif $dir == bottom { $d: top;    }
+
+	border-#{$d}-color: $color;
+}
+
+@mixin shape-box-triangle($color, $dir) {
+	@if $dir == top {
+		background:
+		linear-gradient(to bottom right, transparent 50%, $color 50.1%) no-repeat top left/50% 100%,
+		linear-gradient(to bottom left,  transparent 50%, $color 50.1%) no-repeat top right/50% 100%;
+	} @elseif $dir == left {
+		background:
+		linear-gradient(to top right,    transparent 50%, $color 50.1%) no-repeat bottom left/100% 50%,
+		linear-gradient(to bottom right, transparent 50%, $color 50.1%) no-repeat top right/100% 50%;
+	} @elseif $dir == right {
+		background:
+		linear-gradient(to bottom left, transparent 50%, $color 50.1%) no-repeat top left/100% 50%,
+		linear-gradient(to top left,    transparent 50%, $color 50.1%) no-repeat bottom right/100% 50%;
+	} @elseif $dir == bottom {
+		background:
+		linear-gradient(to top right, transparent 50%, $color 50.1%) no-repeat top left/50% 100%,
+		linear-gradient(to top left,  transparent 50%, $color 50.1%) no-repeat top right/50% 100%;
+	} @elseif $dir == top-left {
+		background:
+		linear-gradient(to top left, transparent 50%, $color 50.1%) no-repeat top left/100% 100%
+	} @elseif $dir == top-right {
+		background:
+		linear-gradient(to top right, transparent 50%, $color 50.1%) no-repeat top left/100% 100%
+	} @elseif $dir == bottom-left {
+		background:
+		linear-gradient(to bottom left, transparent 50%, $color 50.1%) no-repeat top left/100% 100%
+	} @elseif $dir == bottom-right {
+		background:
+		linear-gradient(to bottom right, transparent 50%, $color 50.1%) no-repeat top left/100% 100%
+	}
+}
+
+
+// -----------------------------------------------------------------------------
+
+
+@mixin shape-angle($color, $dir, $size, $width) {
+	$r2: 1 / 1.4142125;
+	width: $size * $r2;
+	height: $size * $r2;
+
+	border-top: $width solid $color;
+	border-left: $width solid $color;
+
+	transform-origin: #{$size * $r2 / 2} #{$size * $r2/ 2};
+	@if     $dir == top    { transform: rotate(45deg);   }
+	@elseif $dir == left   { transform: rotate(-45deg);  }
+	@elseif $dir == right  { transform: rotate(135deg);  }
+	@elseif $dir == bottom { transform: rotate(-135deg); }
+}
+
+@mixin shape-angle-color($color) {
+	border-top-color: $color;
+	border-left-color: $color;
+}
+
+
+// -----------------------------------------------------------------------------
+
+
+@mixin shape-rectangle($color, $width, $height) {
+	width: $width;
+	height: $height;
+	background-color: $color;
+}
+
+@mixin shape-rectangle-color($color) {
+	background-color: $color;
+}
+
+
+// -----------------------------------------------------------------------------
+
+
+@mixin shape-circle($color, $size) {
+	width: $size;
+	height: $size;
+	background-color: $color;
+	border-radius: 50%;
+}
+
+@mixin shape-circle-color($color) {
+	background-color: $color;
+}

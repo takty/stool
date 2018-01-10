@@ -1,0 +1,27 @@
+{
+  "name": "stool",
+  "version": "1.0.0",
+  "description": "Utility Tools of Website Style",
+  "main": "gulpfile.js",
+  "scripts": {
+    "start": "gulp",
+    "postinstall": "gulp build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/takty/stool.git"
+  },
+  "author": "Takuto Yanagida",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/takty/stool/issues"
+  },
+  "homepage": "https://github.com/takty/stool#readme",
+  "devDependencies": {},
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-plumber": "^1.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^3.0.0"
+  }
+}

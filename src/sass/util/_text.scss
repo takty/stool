@@ -1,0 +1,46 @@
+/**
+ *
+ * Text Styles
+ *
+ * @author Takuto Yanagida @ Space-Time Inc.
+ * @version 2017-09-13
+ *
+ */
+
+
+@charset 'utf-8';
+
+
+@mixin text-obscure-link($color, $color_visited: $color) {
+	color: $color;
+	text-decoration: none;
+	&:visited { color: $color_visited; }
+	&:hover { text-decoration: underline; }
+}
+
+@mixin text-multiline-ellipsis($lineHeight: 1.2em, $lineCount: 1, $bgColor: white) {
+	overflow: hidden;
+	position: relative;
+	line-height: $lineHeight;
+	max-height: $lineHeight * $lineCount;
+
+	padding-right: 0.8rem;
+	margin-right: -0.8rem;
+
+	&:before {
+		content: '…';
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		font-size: 0.8rem;
+	}
+	&:after {
+		content: '';
+		position: absolute;
+		right: 0;
+		width: 1em;
+		height: 1em;
+		margin-top: 0.2em;
+		background: $bgColor;
+	}
+}
