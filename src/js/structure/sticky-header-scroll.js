@@ -3,25 +3,25 @@
  * Sticky Header - scroll (JS)
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2017-12-29
+ * @version 2018-01-12
  *
  */
 
 
 document.addEventListener('DOMContentLoaded', function () {
 
-	var CLS_STICKY_ELM     = 'st-sticky-header';
-	var CLS_STICKY_ELM_TOP = 'st-sticky-header-top';
-	var CLS_STATE_STICKY   = 'sticky';
-	var CLS_STATE_FLOATING = 'floating';
+	const CLS_STICKY_ELM     = 'st-sticky-header';
+	const CLS_STICKY_ELM_TOP = 'st-sticky-header-top';
+	const CLS_STATE_STICKY   = 'sticky';
+	const CLS_STATE_FLOATING = 'floating';
 
-	var elmSticky     = document.getElementsByClassName(CLS_STICKY_ELM)[0];
-	var elmStickyView = document.getElementsByClassName(CLS_STICKY_ELM_TOP)[0];
+	const elmSticky     = document.getElementsByClassName(CLS_STICKY_ELM)[0];
+	const elmStickyView = document.getElementsByClassName(CLS_STICKY_ELM_TOP)[0];
 	if (!elmSticky || !elmStickyView) return;
 
-	var elmPh      = document.createElement('div');
-	var isEnabled  = false;
-	var isFloating = false;
+	const elmPh      = document.createElement('div');
+	let isEnabled  = false;
+	let isFloating = false;
 
 	setEnabled(canEnabled());
 	window.addEventListener('resize', onResize);
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		setEnabled(canEnabled());
 		if (!isEnabled) return;
 
-		var h = elmSticky.clientHeight + 'px';
+		const h = elmSticky.clientHeight + 'px';
 		elmPh.style.minHeight = elmPh.style.maxHeight = h;
 		onScroll();
 	}
@@ -50,8 +50,8 @@ document.addEventListener('DOMContentLoaded', function () {
 	function onScroll() {
 		if (!isEnabled) return;
 
-		var height = elmSticky.clientHeight;
-		var offset = elmStickyView.offsetTop;
+		const height = elmSticky.clientHeight;
+		let offset = elmStickyView.offsetTop;
 		if (elmStickyView === elmSticky) offset -= elmSticky.offsetTop;
 
 		if (height < window.pageYOffset) {
@@ -85,12 +85,12 @@ document.addEventListener('DOMContentLoaded', function () {
 	// Common ------------------------------------------------------------------
 
 	function canEnabled() {
-		var FIXED_MIN_WINDOW_WIDTH = 600;  // for-tablet-up
-		var WINDOW_HEIGHT_RATE = 0.3;
+		const FIXED_MIN_WINDOW_WIDTH = 600;  // for-tablet-up
+		const WINDOW_HEIGHT_RATE = 0.3;
 
-		var fmww = (typeof STOOL_FIXED_MIN_WINDOW_WIDTH !== 'undefined') ? STOOL_FIXED_MIN_WINDOW_WIDTH : FIXED_MIN_WINDOW_WIDTH;
+		const fmww = (typeof STOOL_FIXED_MIN_WINDOW_WIDTH !== 'undefined') ? STOOL_FIXED_MIN_WINDOW_WIDTH : FIXED_MIN_WINDOW_WIDTH;
 		if (window.innerWidth < fmww) return false;
-		var h = elmStickyView.clientHeight;
+		const h = elmStickyView.clientHeight;
 		return (h < window.innerHeight * WINDOW_HEIGHT_RATE);
 	}
 
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	// Utilities ---------------------------------------------------------------
 
 	function wrapFunction(fn, delay) {
-		var st;
+		let st;
 		return function() {
 			if (st) clearTimeout(st);
 			st = setTimeout(function () {
@@ -109,21 +109,21 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 
 	function getWpAdminBarHeight() {
-		var wpab = document.getElementById('wpadminbar');
+		const wpab = document.getElementById('wpadminbar');
 		return wpab ? wpab.clientHeight : 0;
 	}
 
 
-	var supportsPassive = false;
+	let supportsPassive = false;
 	try {
-		var opts = Object.defineProperty({}, 'passive', {
+		const opts = Object.defineProperty({}, 'passive', {
 			get: function() { supportsPassive = true; }
 		});
 		window.addEventListener('test', null, opts);
 	} catch (e) {}
 
 	function addEventListenerWithOptions(target, type, handler, options) {
-		var optionsOrCapture = options;
+		let optionsOrCapture = options;
 		if (!supportsPassive) {
 			optionsOrCapture = options.capture;
 		}

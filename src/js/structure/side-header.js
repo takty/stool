@@ -3,28 +3,28 @@
  * Side Header (JS)
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2018-01-01
+ * @version 2018-01-12
  *
  */
 
 
 document.addEventListener('DOMContentLoaded', function () {
 
-	var CLS_STICKY_ELM     = 'st-sticky-header';
-	var CLS_STICKY_ELM_TOP = 'st-sticky-header-top';
+	const CLS_STICKY_ELM     = 'st-sticky-header';
+	const CLS_STICKY_ELM_TOP = 'st-sticky-header-top';
 
-	var DESKTOP_WIDTH_MIN = 1200;
+	const DESKTOP_WIDTH_MIN = 1200;
 
-	var CLS_ENTRY      = 'st-side-header-entry';
-	var CLS_ENTRY_HEAD = 'st-side-header-entry-header';
-	var CLS_ENTRY_CONT = 'st-side-header-entry-content';
+	const CLS_ENTRY      = 'st-side-header-entry';
+	const CLS_ENTRY_HEAD = 'st-side-header-entry-header';
+	const CLS_ENTRY_CONT = 'st-side-header-entry-content';
 
-	var getSiteHeaderOffset = makeOffsetFunction(CLS_STICKY_ELM, CLS_STICKY_ELM_TOP);
-	var tars = collectElements();
+	const getSiteHeaderOffset = makeOffsetFunction(CLS_STICKY_ELM, CLS_STICKY_ELM_TOP);
+	const tars = collectElements();
 
-	var isEnabled = false;
-	var wpabH = 0;
-	var shH   = 0;
+	let isEnabled = false;
+	let wpabH = 0;
+	let shH   = 0;
 
 	window.addEventListener('resize', onResize);
 	onResize();
@@ -32,23 +32,23 @@ document.addEventListener('DOMContentLoaded', function () {
 		onScroll();
 		rafId = window.requestAnimationFrame(scrollAF);
 	}
-	var rafId = 0;
+	let rafId = 0;
 
 
 	// -------------------------------------------------------------------------
 
 	function collectElements() {
-		var ret = [];
-		var es = document.getElementsByClassName(CLS_ENTRY);
+		const ret = [];
+		const es = document.getElementsByClassName(CLS_ENTRY);
 
-		for (var i = 0; i < es.length; i += 1) {
-			var e = es[i];
+		for (let i = 0; i < es.length; i += 1) {
+			const e = es[i];
 
-			var eh = e.getElementsByClassName(CLS_ENTRY_HEAD)[0];
-			var ec = e.getElementsByClassName(CLS_ENTRY_CONT)[0];
+			const eh = e.getElementsByClassName(CLS_ENTRY_HEAD)[0];
+			const ec = e.getElementsByClassName(CLS_ENTRY_CONT)[0];
 			if (!eh || !ec) continue;
 
-			var d = document.createElement('div');
+			const d = document.createElement('div');
 			d.style.position = 'relative';
 			d.style.overflow = 'hidden';
 			d.style.flexGrow = 1;
@@ -65,17 +65,17 @@ document.addEventListener('DOMContentLoaded', function () {
 				window.cancelAnimationFrame(rafId);
 				rafId = 0;
 				isEnabled = false;
-				for (var i = 0; i < tars.length; i += 1) turnOffFixed(tars[i]);
+				for (let i = 0; i < tars.length; i += 1) turnOffFixed(tars[i]);
 			}
 		} else {
 			if (!isEnabled) {
 				setTimeout(function () {
 					isEnabled = true;
-					for (var i = 0; i < tars.length; i += 1) turnOnFixed(tars[i]);
+					for (let i = 0; i < tars.length; i += 1) turnOnFixed(tars[i]);
 				}, 0);
 			}
 			setTimeout(function () {
-				for (var i = 0; i < tars.length; i += 1) updateFixed(tars[i]);
+				for (let i = 0; i < tars.length; i += 1) updateFixed(tars[i]);
 				wpabH = getWpAdminBarHeight();
 				shH   = getSiteHeaderOffset();
 				scrollAF();
@@ -100,11 +100,11 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 
 	function updateFixed(tar) {
-		var w = tar.dummy_header.clientWidth;
+		const w = tar.dummy_header.clientWidth;
 		if (0 < w) {
 			tar.header.style.maxWidth = w + 'px';
-			var hs = getComputedStyle(tar.header);
-			var hh = tar.header.clientHeight + parseInt(hs.marginTop) + parseInt(hs.marginBottom);
+			const hs = getComputedStyle(tar.header);
+			const hh = tar.header.clientHeight + parseInt(hs.marginTop) + parseInt(hs.marginBottom);
 			tar.dummy_header.style.minHeight = hh + 'px';
 		} else {
 			setTimeout(function () {updateFixed(tar);}, 10);
@@ -114,11 +114,11 @@ document.addEventListener('DOMContentLoaded', function () {
 	function onScroll() {
 		if (window.innerWidth < DESKTOP_WIDTH_MIN) return;  // This is needed!
 
-		var pageYOffset = window.pageYOffset;
+		const pageYOffset = window.pageYOffset;
 
-		for (var i = 0; i < tars.length; i += 1) {
-			var tar = tars[i];
-			var newState = getState(tar, pageYOffset, shH);
+		for (let i = 0; i < tars.length; i += 1) {
+			const tar = tars[i];
+			const newState = getState(tar, pageYOffset, shH);
 			if (tar.cur_state === newState) continue;
 
 			if (tar.cur_state) tar.entry.classList.remove(tar.cur_state);
@@ -134,9 +134,9 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 
 	function getState(tar, pageYOffset, siteHeaderH) {
-		var viewY = pageYOffset + siteHeaderH;
-		var entryY = elementTopOnWindow(tar.entry), entryY2 = entryY + tar.entry.clientHeight;
-		var headH = tar.header.clientHeight;
+		const viewY = pageYOffset + siteHeaderH;
+		const entryY = elementTopOnWindow(tar.entry), entryY2 = entryY + tar.entry.clientHeight;
+		const headH = tar.header.clientHeight;
 
 		if (entryY < viewY) {
 			if (headH < entryY2 - viewY) return 'fixed';
@@ -149,15 +149,15 @@ document.addEventListener('DOMContentLoaded', function () {
 	// Utilities ---------------------------------------------------------------
 
 	function makeOffsetFunction(fixedElementClass, fixedHeightClass) {
-		var elmFixed = document.getElementsByClassName(fixedElementClass);
+		let elmFixed = document.getElementsByClassName(fixedElementClass);
 		if (elmFixed && elmFixed.length > 0) {
 			elmFixed = elmFixed[0];
-			var elmHeight = document.getElementsByClassName(fixedHeightClass);
+			let elmHeight = document.getElementsByClassName(fixedHeightClass);
 			if (elmHeight) elmHeight = elmHeight[0];
 			else elmHeight = elmFixed;
 
 			return function () {
-				var pos = getComputedStyle(elmFixed).position;
+				const pos = getComputedStyle(elmFixed).position;
 				return pos === 'fixed' ? elmHeight.clientHeight : 0;
 			};
 		}
@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 
 	function wrapFunction(fn, delay) {
-		var st;
+		let st;
 		return function() {
 			if (st) clearTimeout(st);
 			st = setTimeout(function () {
@@ -176,12 +176,12 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 
 	function getWpAdminBarHeight() {
-		var wpab = document.getElementById('wpadminbar');
+		const wpab = document.getElementById('wpadminbar');
 		return wpab ? wpab.clientHeight : 0;
 	}
 
 	function elementTopOnWindow(elm) {
-		var top = 0;
+		let top = 0;
 		while (elm) {
 			top += elm.offsetTop + getTranslateY(elm);
 			elm = elm.offsetParent;
@@ -191,15 +191,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	function getTranslateY(elm) {
 		if (!elm.style) return 0;
-		var ss = elm.style.transform.split(')');
+		const ss = elm.style.transform.split(')');
 		ss.pop();
-		for (var i = 0; i < ss.length; i += 1) {
-			var vs = ss[i].split('(');
-			var fun = vs[0].trim();
-			var args = vs[1];
+		for (let i = 0; i < ss.length; i += 1) {
+			const vs = ss[i].split('(');
+			const fun = vs[0].trim();
+			const args = vs[1];
 			switch (fun) {
 			case 'translate':
-				var xy = args.split(',');
+				const xy = args.split(',');
 				return parseFloat(xy[1] || '0');
 			case 'translateY':
 				return parseFloat(args);
