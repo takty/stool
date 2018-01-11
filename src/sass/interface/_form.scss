@@ -8,9 +8,6 @@
  */
 
 
-@charset 'utf-8';
-
-
 @mixin form-clear-appearance() {
 	-webkit-appearance: none;
 	-moz-appearance: none;
@@ -37,12 +34,10 @@
 	&::before {
 		border-top-color: $color;
 		transform: translate(50%, 40%) scale(0.65, 1) translate(0, -25%) ;
-		top: 50%;
 	}
 	&::after {
 		border-bottom-color: $color;
 		transform: translate(50%, -40%) scale(0.65, 1) translate(0, -75%) ;
-		top: 50%;
 	}
 	&:hover {
 		transition: all 0.2s ease;

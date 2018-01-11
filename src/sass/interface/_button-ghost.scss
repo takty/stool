@@ -3,12 +3,9 @@
  * Button Styles - Ghost
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2017-12-28
+ * @version 2018-01-11
  *
  */
-
-
-@charset 'utf-8';
 
 
 $button-ghost-border-width    : 1px !default;
@@ -23,7 +20,7 @@ $button-ghost-padding-v      : 1.25rem !default;
 $button-ghost-padding-v-phone: 0.75rem !default;
 
 
-@mixin button-ghost($color, $line_color, $bg_color, $inv_color, $inv_bg_color) {
+@mixin button-ghost($color, $line-color, $color-bg, $color-inv, $color-inv-bg) {
 	@include layout-centering(true);
 
 	padding: $button-link-padding-v-phone $button-link-padding-h-phone;
@@ -39,15 +36,15 @@ $button-ghost-padding-v-phone: 0.75rem !default;
 	user-select: none;
 
 	color: $color;
-	background-color: $bg_color;
+	background-color: $color-bg;
 
-	border: $button-ghost-border-width solid $line_color;
+	border: $button-ghost-border-width solid $line-color;
 	border-radius: $button-ghost-border-radius;
 
 	transition: all 0.3s ease 0s;
 	&:hover {
 		color: $inv-color;
-		background-color: $inv_bg_color;
-		border-color: $inv_bg_color;
+		background-color: $color-inv-bg;
+		border-color: $color-inv-bg;
 	}
 }
