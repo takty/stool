@@ -4,7 +4,7 @@ var uglify   = require('gulp-uglify');
 var rename   = require('gulp-rename');
 
 gulp.task('js', function () {
-	gulp.src('src/js/*/*.js')
+	gulp.src('src/js/**/*.js')
 	.pipe(plumber())
 	.pipe(uglify())
 	.pipe(rename({extname: '.min.js'}))
