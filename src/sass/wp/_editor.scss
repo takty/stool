@@ -29,27 +29,28 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 		@include font-family;
 		@include font-visible-chrome;
 
-		margin: 1rem auto;
-		max-width: calc(100% - 2rem);
+		margin: vr(1) auto;
+		max-width: calc(100% - vr(2));
 
 		overflow-x: hidden !important;
 		&.wp-autoresize { overflow-x: hidden !important; }
 
-		> * + * { margin-top: 1.5rem; }
+		> * + * { margin-top: vr(2); }
 		> *:first-child { margin-top: 0; }
 	}
 
+	@include stile-block-main;
 	@include stile-inline;
 	@include stile-list;
 
-	@include stool-editor-block;
+	/* @include stool-editor-block; */
 	@include stool-editor-heading;
 	@include stool-editor-link;
 	@include stool-editor-table;
 
 }
 
-@mixin stool-editor-block {
+/* @mixin stool-editor-block {
 
 	p, ul, ol { border: dashed 1px $editor-color; }
 
@@ -64,7 +65,7 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 
 	pre { @include font-family-monospace; }
 
-}
+} */
 
 @mixin stool-editor-heading {
 
