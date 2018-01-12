@@ -1,0 +1,137 @@
+/**
+ *
+ * Editor Style
+ *
+ * @author Takuto Yanagida @ Space-Time Inc.
+ * @version 2018-01-12
+ *
+ * @import 'stile/sass/basic';
+ * @import 'stile/sass/content';
+ * @import 'stile/sass/option';
+ *
+ */
+
+
+@import '../lib/stool/sass/button';
+@import '../lib/stool/sass/decoration';
+@import '../lib/stool/sass/icon-font';
+
+$editor-color    : #cdf !default;
+$editor-size-font: 0.85rem !default;
+
+$stile-size-unit: 0.9rem !default;  // Variable in stile
+@function vr($val) {@return $val * $stile-size-unit;}
+
+
+@mixin stool-editor {
+
+	body {
+		@include font-family;
+		@include font-visible-chrome;
+
+		margin: 1rem auto;
+		max-width: calc(100% - 2rem);
+
+		overflow-x: hidden !important;
+		&.wp-autoresize { overflow-x: hidden !important; }
+
+		> * + * { margin-top: 1.5rem; }
+		> *:first-child { margin-top: 0; }
+	}
+
+	@include stile-inline;
+	@include stile-list;
+
+	@include stool-editor-block;
+	@include stool-editor-heading;
+	@include stool-editor-link;
+	@include stool-editor-table;
+
+}
+
+@mixin stool-editor-block {
+
+	p, ul, ol { border: dashed 1px $editor-color; }
+
+	p { line-height: 1.8rem; }
+
+	hr { border-top: solid 2px $block-color-line; }
+
+	blockquote, pre {
+		box-shadow: 0px 0px 8px $block-color-line;
+		padding: 1.5rem;
+	}
+
+	pre { @include font-family-monospace; }
+
+}
+
+@mixin stool-editor-heading {
+
+	h3:not(:first-child) { margin-top: 3rem; }
+	h4:not(:first-child) { margin-top: 1.5rem; }
+	h5:not(:first-child) { margin-top: 1rem; }
+
+	h2, h3, h4, h5, h6, hr { clear: both; }
+
+}
+
+@mixin stool-editor-link {
+
+	a:not([class]) {
+		color: $inline-color-link-text;
+		text-decoration: underline;
+	}
+
+}
+
+@mixin stool-editor-table {
+
+	td {
+		min-width: 1rem;
+		padding: 0.25rem;
+	}
+
+}
+
+@mixin stool-editor-class {
+
+	div.frame {
+		background-color: $block-color-shade;
+		padding: vr(2);
+		line-height: vr(2);
+	}
+
+	div.clear {
+		border: dashed 1px $editor-color;
+		&::after {
+			content: 'Clear Float';
+			color: $editor-color;
+			font-size: $editor-size-font;
+		}
+	}
+
+	// Column ------------------------------------------------------------------
+
+	.column-2,
+	.column-3,
+	.column-4 {
+		position: relative;
+		&::before {
+			position: absolute;
+			top: -1rem;
+			color: $editor-color;
+			font-size: $editor-size-font;
+		}
+		> * {
+			padding: 1rem;
+			border: dashed 1px $editor-color;
+			> * + * { margin-top: 1.5rem; }
+			> *:first-child { margin-top: 0; }
+		}
+	}
+	.column-2::before { content: 'Column 2'; }
+	.column-3::before { content: 'Column 3'; }
+	.column-4::before { content: 'Column 4'; }
+
+}
