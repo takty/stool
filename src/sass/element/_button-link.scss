@@ -98,7 +98,7 @@ $button-link-min-height          : 3rem !default;
 		}
 	}
 	@if $button-link-pop-animation {
-		@include decoration-hover-pop($button-link-pop-color);
+		@include hover-pop($button-link-pop-color);
 	}
 }
 

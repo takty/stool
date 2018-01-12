@@ -3,7 +3,7 @@
  * Hover Styles
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2018-01-11
+ * @version 2018-01-12
  *
  */
 
@@ -23,7 +23,7 @@
 }
 
 @mixin hover-pop($color, $width: 2px, $delta: 1px) {
-	@include decoration-hover-transition();
+	@include hover-transition();
 	position: relative;
 	&:hover {
 		top: -#{$delta};

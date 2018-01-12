@@ -12,12 +12,13 @@
  */
 
 
-@import '../lib/stool/sass/button';
 @import '../lib/stool/sass/decoration';
-@import '../lib/stool/sass/icon-font';
+@import '../lib/stool/sass/element';
+@import '../lib/stool/sass/util';
 
-$editor-color    : #cdf !default;
-$editor-size-font: 0.85rem !default;
+$editor-color          : #cdf !default;
+$editor-size-text-width: 48rem !default;
+$editor-size-font      : 0.85rem !default;
 
 $stile-size-unit: 0.9rem !default;  // Variable in stile
 @function vr($val) {@return $val * $stile-size-unit;}
@@ -29,8 +30,9 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 		@include font-family;
 		@include font-visible-chrome;
 
-		margin: vr(1) auto;
-		max-width: calc(100% - vr(2));
+		margin: vr(1) auto vr(1) vr(1);
+		max-width: $editor-size-text-width;
+		width: calc(100% - #{vr(2)});
 
 		overflow-x: hidden !important;
 		&.wp-autoresize { overflow-x: hidden !important; }
