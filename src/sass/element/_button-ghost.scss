@@ -3,7 +3,7 @@
  * Button Styles - Ghost
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2018-01-11
+ * @version 2018-01-12
  *
  */
 
@@ -43,7 +43,7 @@ $button-ghost-padding-v-phone: 0.75rem !default;
 
 	transition: all 0.3s ease 0s;
 	&:hover {
-		color: $inv-color;
+		color: $color-inv;
 		background-color: $color-inv-bg;
 		border-color: $color-inv-bg;
 	}
