@@ -3,7 +3,7 @@
  * Editor Style
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2018-01-12
+ * @version 2018-01-16
  *
  * @import 'stile/sass/basic';
  * @import 'stile/sass/content';
@@ -96,6 +96,7 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 
 	div.clear {
 		border: dashed 1px $editor-color;
+		clear: both;
 		&::after {
 			content: 'Clear Float';
 			color: $editor-color;
