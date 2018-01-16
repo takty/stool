@@ -55,6 +55,7 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 	@include stool-editor-heading;
 	@include stool-editor-link;
 	@include stool-editor-table;
+	@include stool-editor-option
 	@include stool-editor-class
 }
 
@@ -82,6 +83,30 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 	td {
 		min-width: 1rem;
 		padding: 0.25rem;
+	}
+
+}
+
+@mixin stool-editor-option {
+
+	.size-thumbnail {
+		width: 10rem;
+	}
+
+	.size-small {
+		width: 10rem;
+	}
+
+	.size-medium {
+		width: 20rem;
+	}
+
+	.size-medium_large {
+		width: 30rem;
+	}
+
+	.size-large {
+		width: 40rem;
 	}
 
 }
