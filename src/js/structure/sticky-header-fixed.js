@@ -3,7 +3,7 @@
  * Sticky Header - fixed (JS)
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2018-01-12
+ * @version 2018-01-17
  *
  */
 
@@ -35,7 +35,8 @@ document.addEventListener('DOMContentLoaded', function () {
 			elmSticky.classList.add(CLS_STATE_STICKY);
 			elmSticky.parentNode.insertBefore(elmPh, elmSticky);
 		} else {
-			elmSticky.classList.remove(CLS_STATE_STICKY, CLS_STATE_FLOATING);
+			elmSticky.classList.remove(CLS_STATE_STICKY);
+			elmSticky.classList.remove(CLS_STATE_FLOATING);
 			elmSticky.style.transform = '';
 			elmSticky.parentNode.removeChild(elmPh);
 			isFloating = false;

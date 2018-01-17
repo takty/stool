@@ -3,7 +3,7 @@
  * Sticky Header - scroll (JS)
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2018-01-12
+ * @version 2018-01-17
  *
  */
 
@@ -63,7 +63,8 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 
 	function turnOnFloating() {
-		elmSticky.classList.add(CLS_STATE_STICKY, CLS_STATE_FLOATING);
+		elmSticky.classList.add(CLS_STATE_STICKY);
+		elmSticky.classList.add(CLS_STATE_FLOATING);
 		elmSticky.parentNode.insertBefore(elmPh, elmSticky);
 		isFloating = true;
 	}
@@ -74,7 +75,8 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 
 	function turnOffFloating() {
-		elmSticky.classList.remove(CLS_STATE_STICKY, CLS_STATE_FLOATING);
+		elmSticky.classList.remove(CLS_STATE_STICKY);
+		elmSticky.classList.remove(CLS_STATE_FLOATING);
 		elmSticky.parentNode.removeChild(elmPh);
 		elmSticky.style.top = '';
 		elmSticky.style.transform = '';
