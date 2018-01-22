@@ -3,7 +3,7 @@
  * Button Styles - Link
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2017-12-28
+ * @version 2018-01-22
  *
  */
 
@@ -11,11 +11,11 @@
 @charset 'utf-8';
 
 
-$button-link-bg-color    : transparent !default;
-$button-link-border-color: gray !default;
-$button-link-text-color  : gray !default;
-$button-link-icon-color  : gray !default;
-$button-link-pop-color   : gray !default;
+$button-link-color-bg    : transparent !default;
+$button-link-color-border: gray !default;
+$button-link-color-text  : gray !default;
+$button-link-color-icon  : gray !default;
+$button-link-color-pop   : gray !default;
 
 $button-link-border-width    : 2px !default;
 $button-link-border-radius   : 4px !default;
@@ -42,6 +42,11 @@ $button-link-min-height          : 3rem !default;
 
 
 @mixin button-link($icon: true) {
+	@include button-link-main($icon);
+	@include button-link-color($icon, $button-link-color-bg, $button-link-color-border, $button-link-color-text, $button-link-color-icon, $button-link-color-pop);
+}
+
+@mixin button-link-main($icon: true) {
 	position: relative;
 	display: inline-flex;
 	align-items: center;
@@ -58,12 +63,10 @@ $button-link-min-height          : 3rem !default;
 		padding-left: $button-link-padding-h-icon-phone;
 		@include for-tablet-up { padding-left: $button-link-padding-h-icon; }
 	}
-	border: $button-link-border-width solid $button-link-border-color;
+	border: $button-link-border-width solid;
 	border-radius: $button-link-border-radius;
 	height: 100%;
 
-	color: $button-link-text-color;
-	background-color: $button-link-bg-color;
 	line-height: $button-link-text-line-height;
 	font-size: $button-link-text-size;
 	@include font-proportional;
@@ -75,7 +78,6 @@ $button-link-min-height          : 3rem !default;
 	@if $icon == true or $icon == 'right' {
 		&::before {
 			@include layout-centering-self(false, true);
-			color: $button-link-icon-color;
 			font-size: $button-link-icon-size;
 			@include icon-font-mi($button-link-icon-right);
 			right: $button-link-icon-pos-phone;
@@ -90,15 +92,24 @@ $button-link-min-height          : 3rem !default;
 	} @else if $icon == 'left' {
 		&::before {
 			@include layout-centering-self(false, true);
-			color: $button-link-icon-color;
 			font-size: $button-link-icon-size;
 			@include icon-font-mi($button-link-icon-left);
 			left: $button-link-icon-pos-phone;
 			@include for-tablet-up { left: $button-link-icon-pos; }
 		}
 	}
+}
+
+@mixin button-link-color($icon, $color-bg, $color-border, $color-text, $color-icon, $color-pop) {
+	color: $color-text;
+	background-color: $color-bg;
+	border-color: $color-border;
+
+	@if $icon == true or $icon == 'right' or $icon == 'left' {
+		&::before { color: $color-icon; }
+	}
 	@if $button-link-pop-animation {
-		@include hover-pop($button-link-pop-color);
+		@include hover-pop($color-pop);
 	}
 }
 
