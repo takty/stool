@@ -3,7 +3,7 @@
  * Form Styles
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2018-01-11
+ * @version 2018-02-15
  *
  */
 
@@ -30,6 +30,7 @@
 
 		top: 50%;
 		right: $right;
+		z-index: 1;
 	}
 	&::before {
 		border-top-color: $color;
