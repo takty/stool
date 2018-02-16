@@ -3,7 +3,7 @@
  * Sticky Header - scroll (JS)
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2018-01-17
+ * @version 2018-02-16
  *
  */
 
@@ -28,6 +28,8 @@ document.addEventListener('DOMContentLoaded', function () {
 	onResize();
 	addEventListenerWithOptions(window, 'scroll', wrapFunction(onScroll, 10), {capture: true});
 	onScroll();
+
+	doBeforePrint(function () {setEnabled(false);});
 
 	function setEnabled(flag) {
 		if (flag === isEnabled) return;
@@ -113,6 +115,15 @@ document.addEventListener('DOMContentLoaded', function () {
 	function getWpAdminBarHeight() {
 		const wpab = document.getElementById('wpadminbar');
 		return wpab ? wpab.clientHeight : 0;
+	}
+
+	function doBeforePrint(func, forceMediaCheck = true) {
+		window.addEventListener('beforeprint', func, false);
+		if (forceMediaCheck || !('onbeforeprint' in window)) {
+			if (window.matchMedia && (printMedia = matchMedia('print')) && printMedia.addListener) {
+				printMedia.addListener(function () {if (printMedia.matches) func();});
+			}
+		}
 	}
 
 
