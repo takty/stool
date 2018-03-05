@@ -3,7 +3,7 @@
  * Editor Style
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2018-01-16
+ * @version 2018-03-05
  *
  * @import 'stile/sass/basic';
  * @import 'stile/sass/content';
@@ -48,9 +48,12 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 
 	p, ul, ol, dl { border: dashed 1px $editor-color; }
 
+	// From Stile Content
 	@include stile-block-main;
 	@include stile-inline;
 	@include stile-list;
+	// From Stile Option
+	@include stile-container;
 
 	@include stool-editor-heading;
 	@include stool-editor-link;
@@ -144,8 +147,6 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 		> * {
 			padding: 1rem;
 			border: dashed 1px $editor-color;
-			> * + * { margin-top: vr(2); }
-			> *:first-child { margin-top: 0; }
 		}
 	}
 	.column-2::before { content: 'Column 2'; }
