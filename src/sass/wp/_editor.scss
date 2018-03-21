@@ -3,7 +3,7 @@
  * Editor Style
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2018-03-05
+ * @version 2018-03-21
  *
  * @import 'stile/sass/basic';
  * @import 'stile/sass/content';
@@ -16,13 +16,18 @@
 @import '../lib/stool/sass/element';
 @import '../lib/stool/sass/util';
 
-$editor-color          : #cdf !default;
+$editor-color          : #bce !default;
 $editor-size-text-width: 48rem !default;
 $editor-size-font      : 0.85rem !default;
 
 $stile-size-unit: 0.9rem !default;  // Variable in stile
 @function vr($val) {@return $val * $stile-size-unit;}
 
+
+@mixin _child_margin {
+	> * + * { margin-top: vr(2); }
+	> *:first-child { margin-top: 0; }
+}
 
 @mixin stool-editor {
 
@@ -37,13 +42,11 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 		overflow-x: hidden !important;
 		&.wp-autoresize { overflow-x: hidden !important; }
 
-		> * + * { margin-top: vr(2); }
-		> *:first-child { margin-top: 0; }
+		@include _child_margin;
 	}
 
 	blockquote {
-		> * + * { margin-top: vr(1); }
-		> *:first-child { margin-top: 0; }
+		@include _child_margin;
 	}
 
 	p, ul, ol, dl { border: dashed 1px $editor-color; }
@@ -92,6 +95,34 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 
 @mixin stool-editor-option {
 
+	// Container ---------------------------------------------------------------
+
+	.column-2,
+	.column-3,
+	.column-4 {
+		position: relative;
+		&::before {
+			position: absolute;
+			top: -0.45rem;
+			left: 0;
+			color: $editor-color;
+			background-color: #fff;
+			font-size: $editor-size-font;
+			line-height: 1;
+		}
+		> * {
+			padding: 1rem;
+			border: dashed 1px $editor-color;
+			@include _child_margin;
+		}
+	}
+	.column-2::before { content: 'Column 2'; }
+	.column-3::before { content: 'Column 3'; }
+	.column-4::before { content: 'Column 4'; }
+
+
+	// Image Size --------------------------------------------------------------
+
 	.size-thumbnail {
 		width: 10rem;
 	}
@@ -112,6 +143,27 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 		width: 40rem;
 	}
 
+
+	// Tab Page ----------------------------------------------------------------
+
+	.tab-page {
+		padding: 1rem;
+		border: dashed 1px $editor-color;
+		@include _child_margin;
+
+		position: relative;
+		&::before {
+			content: 'Tab Page';
+			position: absolute;
+			top: -0.5rem;
+			left: 0;
+			color: $editor-color;
+			background-color: #fff;
+			font-size: $editor-size-font;
+			line-height: 1;
+		}
+	}
+
 }
 
 @mixin stool-editor-class {
@@ -120,6 +172,8 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 		background-color: $block-color-shade;
 		padding: vr(2);
 		line-height: vr(2);
+
+		@include _child_margin;
 	}
 
 	div.clear {
@@ -131,26 +185,5 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 			font-size: $editor-size-font;
 		}
 	}
-
-	// Column ------------------------------------------------------------------
-
-	.column-2,
-	.column-3,
-	.column-4 {
-		position: relative;
-		&::before {
-			position: absolute;
-			top: -1rem;
-			color: $editor-color;
-			font-size: $editor-size-font;
-		}
-		> * {
-			padding: 1rem;
-			border: dashed 1px $editor-color;
-		}
-	}
-	.column-2::before { content: 'Column 2'; }
-	.column-3::before { content: 'Column 3'; }
-	.column-4::before { content: 'Column 4'; }
 
 }
