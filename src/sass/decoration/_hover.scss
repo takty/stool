@@ -3,7 +3,7 @@
  * Hover Styles
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2018-01-12
+ * @version 2018-03-30
  *
  */
 
@@ -12,13 +12,25 @@
 
 
 @mixin hover-transition($prop: all, $time: 0.2s, $type: ease) {
-	transition: $prop $time $type;
+	transition-property: $prop;
+	transition-duration: $time;
+	transition-timing-function: $type;
+
 	&::before, &::after {
-		transition: $prop $time $type;
+		transition-property: $prop;
+		transition-duration: $time;
+		transition-timing-function: $type;
 	}
 	&:hover {
-		transition: $prop $time $type;
-		&::before, &::after { transition: $prop $time $type; }
+		transition-property: $prop;
+		transition-duration: $time;
+		transition-timing-function: $type;
+
+		&::before, &::after {
+			transition-property: $prop;
+			transition-duration: $time;
+			transition-timing-function: $type;
+		}
 	}
 }
 
