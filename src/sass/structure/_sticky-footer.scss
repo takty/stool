@@ -3,7 +3,7 @@
  * Sticky Footer
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2017-09-04
+ * @version 2018-04-03
  *
  * * Required Structure
  *
@@ -26,8 +26,10 @@ html, body {
 }
 
 @mixin sticky-footer-site {
-	display: flex;
-	flex-direction: column;
+	@media screen {
+		display: flex;
+		flex-direction: column;
+	}
 	min-height: 100vh;  // for IE11
 }
 
@@ -36,9 +38,13 @@ html, body {
 }
 
 @mixin sticky-footer-site-content {
-	flex-grow: 1;
+	@media screen {
+		flex-grow: 1;
+	}
 }
 
 body {  // for IE11
-	display: flex;
+	@media screen {
+		display: flex;
+	}
 }
