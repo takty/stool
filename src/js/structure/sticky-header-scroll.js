@@ -3,7 +3,7 @@
  * Sticky Header - scroll (JS)
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2018-02-16
+ * @version 2018-05-18
  *
  */
 
@@ -52,12 +52,17 @@ document.addEventListener('DOMContentLoaded', function () {
 	function onScroll() {
 		if (!isEnabled) return;
 
-		const height = elmSticky.clientHeight;
+		let height = elmSticky.clientHeight;
 		let offset = elmStickyView.offsetTop;
 		if (elmStickyView === elmSticky) offset -= elmSticky.offsetTop;
 
 		if (height < window.pageYOffset) {
 			if (!isFloating) turnOnFloating();
+
+			// Recalc here!
+			let height = elmSticky.clientHeight;
+			let offset = elmStickyView.offsetTop;
+			if (elmStickyView === elmSticky) offset -= elmSticky.offsetTop;
 			adjustFloating(offset, height);
 		} else if (window.pageYOffset <= offset) {
 			if (isFloating) turnOffFloating();
