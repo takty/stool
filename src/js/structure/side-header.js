@@ -135,7 +135,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	function getState(tar, pageYOffset, siteHeaderH) {
 		const viewY = pageYOffset + siteHeaderH;
-		const entryY = elementTopOnWindow(tar.entry), entryY2 = entryY + tar.entry.clientHeight;
+		const tarB = tar.entry.getBoundingClientRect();
+		// const entryY = elementTopOnWindow(tar.entry), entryY2 = entryY + tar.entry.clientHeight;
+		const entryY = tarB.top + pageYOffset, entryY2 = entryY + tar.entry.clientHeight;
 		const headH = tar.header.clientHeight;
 
 		if (entryY < viewY) {
