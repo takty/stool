@@ -1,0 +1,109 @@
+/**
+ *
+ * Queries for Responsive and Browsers
+ *
+ * @author Takuto Yanagida @ Space-Time Inc.
+ * @version 2018-05-05
+ *
+ * https://medium.freecodecamp.org/the-100-correct-way-to-do-css-breakpoints-88d6a5ba1862
+ *
+ */
+
+
+@function mmToPx($v) {
+	@return round(($v - 80) / 25.4 * 72px);  // '80mm' is the sum of the side margins of papers.
+}
+
+@mixin for-phone-only {
+	@media screen and (max-width: 599px), print and (max-width: #{mmToPx(148) - 1}) {
+		@content;
+	}
+}
+
+@mixin for-tablet-up {
+	@media screen and (min-width: 600px), print and (min-width: mmToPx(148)) {
+		@content;
+	}
+}
+
+@mixin for-tablet-only {
+	@media screen and (min-width: 600px) and (max-width: 1199px), print and (min-width: mmToPx(148)) and (max-width: #{mmToPx(297) - 1}) {
+		@content;
+	}
+}
+
+@mixin for-tablet-portrait-up {
+	@media screen and (min-width: 600px), print and (min-width: mmToPx(148)) {
+		@content;
+	}
+}
+
+@mixin for-tablet-portrait-only {
+	@media screen and (min-width: 600px) and (max-width: 899px), print and (min-width: mmToPx(148)) and (max-width: #{mmToPx(210) - 1}) {
+		@content;
+	}
+}
+
+@mixin for-tablet-landscape-up {
+	@media screen and (min-width: 900px), print and (min-width: mmToPx(210)) {
+		@content;
+	}
+}
+
+@mixin for-tablet-landscape-only {
+	@media screen and (min-width: 900px) and (max-width: 1199px), print and (min-width: mmToPx(210)) and (max-width: #{mmToPx(297) - 1}) {
+		@content;
+	}
+}
+
+@mixin for-desktop-up {
+	@media screen and (min-width: 1200px), print and (min-width: mmToPx(297)) {
+		@content;
+	}
+}
+
+@mixin for-desktop-only {
+	@media screen and (min-width: 1200px) and (max-width: 1799px), print and (min-width: mmToPx(297)) and (max-width: #{mmToPx(420) - 1}) {
+		@content;
+	}
+}
+
+@mixin for-big-desktop-up {
+	@media screen and (min-width: 1800px), print and (min-width: mmToPx(420)) {
+		@content;
+	}
+}
+
+
+// -----------------------------------------------------------------------------
+
+
+@mixin for-chrome {
+	@media (-webkit-min-device-pixel-ratio: 0) and (min-resolution: .001dpcm) {
+		@content;
+	}
+}
+
+@mixin for-firefox {
+	@media (min--moz-device-pixel-ratio: 0) and (min-resolution: 3e1dpcm) {
+		@content;
+	}
+}
+
+@mixin for-safari {
+	@media not all and (min-resolution: .001dpcm) { @supports (-webkit-appearance: none) {
+		@content;
+	} }
+}
+
+@mixin for-edge {
+	@supports (-ms-ime-align: auto) {
+		@content;
+	}
+}
+
+@mixin for-ie {
+	@media (-ms-high-contrast: none) {
+		@content;
+	}
+}

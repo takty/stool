@@ -1,0 +1,107 @@
+/**
+ *
+ * Classes for Containers (SCSS)
+ *
+ * @author Takuto Yanagida @ Space-Time Inc.
+ * @version 2018-05-19
+ *
+ */
+
+
+@import '../basic/layout';
+@import '../basic/query';
+
+$stile-container-column-gap        : vr(2) !default;
+$stile-container-column-2-min-width: 16rem !default;
+$stile-container-column-3-min-width: 12rem !default;
+$stile-container-column-4-min-width: 10rem !default;
+
+
+@mixin stile-container {
+	.column-2,
+	.column-3,
+	.column-4 {
+		@include layout-gap($stile-container-column-gap, $stile-container-column-gap);
+		display: flex;
+		flex-wrap: wrap;
+
+		> * {  // One of Columns
+			@include stile-margin-basic;
+			flex-grow: 1;
+		}
+	}
+	.column-2 {
+		> * {
+			width: calc(50% - #{$stile-container-column-gap});
+			min-width: $stile-container-column-2-min-width;
+		}
+	}
+	.column-3 {
+		> * {
+			width: calc((#{$stile-container-column-3-min-width * 3 + $stile-container-column-gap * 2} - 100%) * 1000);
+			min-width: calc(33% - #{$stile-container-column-gap});
+			max-width: 100%;
+		}
+	}
+	.column-4 {
+		> * {
+			width: calc(50% - #{$stile-container-column-gap});
+			min-width: $stile-container-column-2-min-width;
+			
+			@include for-tablet-up {
+				width: calc((#{$stile-container-column-4-min-width * 4 + $stile-container-column-gap * 3} - 100%) * 1000);
+				min-width: calc(25% - #{$stile-container-column-gap});
+				max-width: calc(50% - #{$stile-container-column-gap});
+			}
+		}
+	}
+
+
+	//--------------------------------------------------------------------------
+
+
+	.card-2,
+	.card-3,
+	.card-4 {
+		@include layout-gap($stile-container-column-gap, $stile-container-column-gap);
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+
+		> * {  // One of Columns
+			@include stile-margin-basic;
+			flex-grow: 1;
+		}
+		> *:empty {
+			margin-right: $stile-container-column-gap;
+		}
+	}
+	.card-2 {
+		> * {
+			width: calc(50% - #{$stile-container-column-gap});
+			min-width: $stile-container-column-2-min-width;
+		}
+		&::after {
+			content: '';
+			display: block;
+
+			margin-right: $stile-container-column-gap;
+			flex-grow: 1;
+
+			width: calc(50% - #{$stile-container-column-gap});
+			min-width: $stile-container-column-2-min-width;
+		}
+	}
+	.card-3 {
+		> * {
+			flex-basis: calc(33% - #{$stile-container-column-gap});
+			min-width: $stile-container-column-3-min-width;
+		}
+	}
+	.card-4 {
+		> * {
+			flex-basis: calc(25% - #{$stile-container-column-gap});
+			min-width: $stile-container-column-4-min-width;
+		}
+	}
+}
