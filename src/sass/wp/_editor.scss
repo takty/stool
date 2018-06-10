@@ -99,7 +99,19 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 
 	.alignleft,
 	.alignright {
+		width: initial !important;  // For canceling default width assigned by WP
+		min-width: 10rem;  // Same with size-thumbnail and size-small
 		@include fill-stripe(#fff, $editor-color, 1rem, -45deg, 1%);
+		margin-top: base-vr(1);
+		margin-bottom: base-vr(1);
+	}
+
+	.alignleft {
+		margin-right: base-vr(2);
+	}
+
+	.alignright {
+		margin-left: base-vr(2);
 	}
 
 
