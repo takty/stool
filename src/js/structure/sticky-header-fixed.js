@@ -3,7 +3,7 @@
  * Sticky Header - fixed (JS)
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2018-02-16
+ * @version 2018-06-11
  *
  */
 
