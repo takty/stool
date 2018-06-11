@@ -36,6 +36,9 @@ document.addEventListener('DOMContentLoaded', function () {
 		if (flag) {
 			elmSticky.classList.add(CLS_STATE_STICKY);
 			elmSticky.parentNode.insertBefore(elmPh, elmSticky);
+			if (document.body.classList.contains('ie11')) {
+				elmSticky.style.top = getWpAdminBarHeight() + 'px';
+			}
 		} else {
 			elmSticky.classList.remove(CLS_STATE_STICKY);
 			elmSticky.classList.remove(CLS_STATE_FLOATING);
@@ -110,6 +113,11 @@ document.addEventListener('DOMContentLoaded', function () {
 				printMedia.addListener(function () {if (printMedia.matches) func();});
 			}
 		}
+	}
+
+	function getWpAdminBarHeight() {
+		const wpab = document.getElementById('wpadminbar');
+		return (wpab && getComputedStyle(wpab).position === 'fixed') ? wpab.offsetHeight : 0;
 	}
 
 
