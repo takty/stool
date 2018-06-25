@@ -3,7 +3,7 @@
  * Editor Style
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2018-06-11
+ * @version 2018-06-25
  *
  * @import 'stile/sass/basic';
  * @import 'stile/sass/content';
@@ -38,9 +38,6 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 		margin: vr(1) auto vr(1) vr(1);
 		max-width: $editor-size-text-width;
 		width: calc(100% - #{vr(2)});
-
-		overflow-x: hidden !important;
-		&.wp-autoresize { overflow-x: hidden !important; }
 
 		@include _child_margin;
 	}
@@ -99,7 +96,6 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 
 	.alignleft,
 	.alignright {
-		width: initial !important;  // For canceling default width assigned by WP
 		min-width: 10rem;  // Same with size-thumbnail and size-small
 		@include fill-stripe(#fff, $editor-color, 1rem, -45deg, 1%);
 		margin-top: base-vr(1);
