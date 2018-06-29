@@ -3,7 +3,7 @@
  * Side Header (SCSS)
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2018-01-11
+ * @version 2018-06-29
  *
  * @import 'lib/stile/sass/basic/query';
  *
@@ -62,5 +62,25 @@ $side-header-size-vertical-padding-phone: 1rem !default;
 		@include for-phone-only  { margin-top:  $side-header-size-vertical-margin-phone; }
 		@include for-tablet-only { margin-top:  $side-header-size-vertical-margin; }
 		@include for-desktop-up  { margin-left: $side-header-size-horizontal-margin; }
+	}
+}
+
+@media print {
+	.st-side-header-entry {
+		position: relative;
+		display: block;
+	}
+	.st-side-header-entry-header {
+		padding: 0;
+		padding-top: $side-header-size-vertical-padding;
+	}
+	.st-side-header-entry-content {
+		padding: 0;
+		padding-bottom: $side-header-size-vertical-padding;
+
+		.st-side-header-entry > *:first-child + & {
+			margin-top:  $side-header-size-vertical-margin;
+			margin-left: auto;
+		}
 	}
 }

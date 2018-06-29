@@ -3,7 +3,7 @@
  * Side Header (JS)
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2018-01-12
+ * @version 2018-06-29
  *
  */
 
@@ -22,9 +22,10 @@ document.addEventListener('DOMContentLoaded', function () {
 	const getSiteHeaderOffset = makeOffsetFunction(CLS_STICKY_ELM, CLS_STICKY_ELM_TOP);
 	const tars = collectElements();
 
-	let isEnabled = false;
 	let wpabH = 0;
 	let shH   = 0;
+	let isEnabled = false;
+	let isPrinting = false;
 
 	window.addEventListener('resize', onResize);
 	onResize();
@@ -33,6 +34,16 @@ document.addEventListener('DOMContentLoaded', function () {
 		rafId = window.requestAnimationFrame(scrollAF);
 	}
 	let rafId = 0;
+
+	doBeforePrint(function () {
+		isEnabled = false;
+		isPrinting = true;
+		for (let i = 0; i < tars.length; i += 1) turnOffFixed(tars[i]);
+	});
+	doAfterPrint(function () {
+		isPrinting = false;
+		onResize();
+	});
 
 
 	// -------------------------------------------------------------------------
@@ -60,6 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 
 	function onResize() {
+		if (isPrinting) return;
 		if (window.innerWidth < DESKTOP_WIDTH_MIN) {
 			if (isEnabled) {
 				window.cancelAnimationFrame(rafId);
@@ -112,6 +124,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 
 	function onScroll() {
+		if (isPrinting) return;
 		if (window.innerWidth < DESKTOP_WIDTH_MIN) return;  // This is needed!
 
 		const pageYOffset = window.pageYOffset;
@@ -136,7 +149,6 @@ document.addEventListener('DOMContentLoaded', function () {
 	function getState(tar, pageYOffset, siteHeaderH) {
 		const viewY = pageYOffset + siteHeaderH;
 		const tarB = tar.entry.getBoundingClientRect();
-		// const entryY = elementTopOnWindow(tar.entry), entryY2 = entryY + tar.entry.clientHeight;
 		const entryY = tarB.top + pageYOffset, entryY2 = entryY + tar.entry.clientHeight;
 		const headH = tar.header.clientHeight;
 
@@ -166,48 +178,33 @@ document.addEventListener('DOMContentLoaded', function () {
 		return function () { return 0; }
 	}
 
-	function wrapFunction(fn, delay) {
-		let st;
-		return function() {
-			if (st) clearTimeout(st);
-			st = setTimeout(function () {
-				fn();
-				st = null;
-			}, delay);
-		};
-	}
-
 	function getWpAdminBarHeight() {
 		const wpab = document.getElementById('wpadminbar');
 		return wpab ? wpab.clientHeight : 0;
 	}
 
-	function elementTopOnWindow(elm) {
-		let top = 0;
-		while (elm) {
-			top += elm.offsetTop + getTranslateY(elm);
-			elm = elm.offsetParent;
-		}
-		return top;
-	}
-
-	function getTranslateY(elm) {
-		if (!elm.style) return 0;
-		const ss = elm.style.transform.split(')');
-		ss.pop();
-		for (let i = 0; i < ss.length; i += 1) {
-			const vs = ss[i].split('(');
-			const fun = vs[0].trim();
-			const args = vs[1];
-			switch (fun) {
-			case 'translate':
-				const xy = args.split(',');
-				return parseFloat(xy[1] || '0');
-			case 'translateY':
-				return parseFloat(args);
+	function doBeforePrint(func, forceMediaCheck = true) {
+		window.addEventListener('beforeprint', func, false);
+		if (forceMediaCheck || !('onbeforeprint' in window)) {
+			if (window.matchMedia) {
+				let mediaQueryList = window.matchMedia('print');
+				mediaQueryList.addListener(function (mql) {
+					if (mql.matches) func();
+				});
 			}
 		}
-		return 0;
+	}
+
+	function doAfterPrint(func, forceMediaCheck = true) {
+		window.addEventListener('afterprint', func, false);
+		if (forceMediaCheck || !('onafterprint' in window)) {
+			if (window.matchMedia) {
+				let mediaQueryList = window.matchMedia('screen');
+				mediaQueryList.addListener(function (mql) {
+					if (mql.matches) func();
+				});
+			}
+		}
 	}
 
 });
