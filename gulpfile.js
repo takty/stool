@@ -43,14 +43,13 @@ gulp.task('docs-sass', gulp.series('sass', () => {
 		.pipe(gulp.dest('docs'));
 }));
 
-gulp.task('docs-js', gulp.series('js', () => {
-	return gulp.src(['dist/js/stile-full.min.js'])
-		.pipe($.plumber())
-		.pipe(gulp.dest('docs'));
-}));
+gulp.task('docs-watch', () => {
+	gulp.watch('src/sass/**/*.scss', gulp.series('docs-sass'));
+	gulp.watch('docs/style.scss',    gulp.series('docs-sass'));
+});
 
-gulp.task('docs', gulp.parallel('default', () => {
-	gulp.watch('src/js/**/*.js',     ['docs-js']);
-	gulp.watch('src/sass/**/*.scss', ['docs-sass']);
-	gulp.watch('docs/style.scss',    ['docs-sass']);
-}));
+gulp.task('docs-build', gulp.series('docs-sass'));
+
+gulp.task('docs-default', gulp.series('docs-build', 'docs-watch'));
+
+gulp.task('docs', gulp.parallel('default', 'docs-default'));

@@ -4,8 +4,9 @@
   "description": "Utility Tools of Website Style",
   "main": "gulpfile.js",
   "scripts": {
+    "postinstall": "gulp build",
     "start": "gulp",
-    "postinstall": "gulp build"
+    "docs": "gulp docs"
   },
   "repository": {
     "type": "git",
