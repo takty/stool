@@ -3,17 +3,17 @@
  * List Style (SCSS)
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2018-05-06
+ * @version 2018-06-04
  *
  */
 
 
+@import '../basic/base';
+@import '../basic/font';
+
 $stile-list-color-mark      : rgba(#777, 0.9) !default;
 $stile-list-rate-mark       : 0.45 !default;
 $stile-list-rate-square-mark: 0.44 !default;
-
-$stile-size-unit: 0.9rem !default;
-@function vr($val) {@return $val * $stile-size-unit;}
 
 
 @mixin stile-list {
@@ -27,17 +27,17 @@ $stile-size-unit: 0.9rem !default;
 
 
 @mixin stile-list-ul {
-
 	ul:not([class]),
 	ul.stile {
 		list-style: none;
 
-		padding-left: vr(4);
-		&[data-stile ~= 'no-indent'] { padding-left: vr(2); }
+		padding-left: base-vr(4);
+		&[data-stile ~= 'no-indent'] { padding-left: base-vr(2); }
+		@include for-phone-only      { padding-left: base-vr(2); }
 
 		> li {
 			position: relative;
-			line-height: vr(2);
+			line-height: base-vr(2);
 		}
 
 		> li::before {
@@ -46,8 +46,8 @@ $stile-size-unit: 0.9rem !default;
 			display: block;
 			box-sizing: border-box;
 
-			top: calc(#{vr(1)} - 0.01rem);
-			left: - vr(2);
+			top: calc(#{base-vr(1)} - 0.01rem);
+			left: - base-vr(2);
 
 			width: 1em;
 			height: 1em;
@@ -76,7 +76,6 @@ $stile-size-unit: 0.9rem !default;
 			background-color: $stile-list-color-mark;
 		}
 	}
-
 }
 
 
@@ -84,32 +83,32 @@ $stile-size-unit: 0.9rem !default;
 
 
 @mixin stile-list-ol {
-
 	ol:not([class]),
 	ol.stile {
-
-		padding-left: vr(1);
+		padding-left: base-vr(1);
 		&[data-stile ~= 'no-indent'] { padding-left: 0; }
+		@include for-phone-only      { padding-left: 0; }
 
 		> li {
 			counter-increment: li;
 			display: table-row;
-			line-height: vr(2);
+			line-height: base-vr(2);
 		}
 
 		> li::before {
 			content: counter(li) '.';
 			display: table-cell;
 
-			min-width: vr(3);
-			padding-right: vr(1);
+			min-width: base-vr(3);
+			padding-right: base-vr(1);
 			text-align: right;
 
 			@include font-bold;
 			
 			color: $stile-list-color-mark;
 		}
-		&[data-stile ~= 'no-indent'] > li::before { min-width: vr(2); }
+		&[data-stile ~= 'no-indent'] > li::before { min-width: base-vr(2); }
+		@include for-phone-only { > li::before { min-width: base-vr(2); } }
 
 		&[data-stile ~= 'list-lower-alpha'] > li::before {
 			content: counter(li, lower-alpha) '.';
@@ -131,7 +130,6 @@ $stile-size-unit: 0.9rem !default;
 			content: counter(li, upper-roman) '.';
 		}
 	}
-
 }
 
 
@@ -139,13 +137,13 @@ $stile-size-unit: 0.9rem !default;
 
 
 @mixin stile-list-dl {
-
 	dl:not([class]),
 	dl.stile {
+		padding-left: base-vr(2);
+		&[data-stile ~= 'no-indent'] { padding-left: 0; }
+		@include for-phone-only      { padding-left: 0; }
 
-		&:not([data-stile ~= 'no-indent']) { padding-left: vr(2); }
-
-		line-height: vr(2);
+		line-height: base-vr(2);
 
 		> dt {
 			@include font-bold;
@@ -153,7 +151,6 @@ $stile-size-unit: 0.9rem !default;
 			color: $stile-list-color-mark; 
 		}
 
-		> dd { padding-left: vr(2); }
+		> dd { padding-left: base-vr(2); }
 	}
-
 }

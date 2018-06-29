@@ -3,10 +3,14 @@
  * Table Style (SCSS)
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2018-05-22
+ * @version 2018-06-26
  *
  */
 
+
+@import '../basic/base';
+@import '../basic/query';
+@import '../basic/font';
 
 $stile-table-color-rule-horizontal      : rgba(#777, 0.35) !default;
 $stile-table-color-rule-horizontal-edge : $stile-table-color-rule-horizontal !default;
@@ -19,9 +23,6 @@ $stile-table-color-enlarge-button       : rgba($stile-table-color-rule-horizonta
 $stile-table-color-enlarge-button-opened: rgba($stile-table-color-rule-horizontal, 0.25) !default;
 $stile-table-color-background-enlarged  : #fff !default;
 $stile-table-size-rule-horizontal-edge  : 2px !default;
-
-$stile-size-unit: 0.9rem !default;
-@function vr($val) {@return $val * $stile-size-unit;}
 
 
 @mixin stile-table {
@@ -43,7 +44,7 @@ $stile-size-unit: 0.9rem !default;
 
 	// Design ------------------------------------------------------------------
 
-	thead, tbody:first-child {
+	thead, tbody:first-child, colgroup + tbody {
 		border-top: $stile-table-size-rule-horizontal-edge solid;
 
 		border-top-color: $stile-table-color-rule-horizontal-edge;
@@ -56,14 +57,18 @@ $stile-size-unit: 0.9rem !default;
 	}
 
 	th, td {
-		padding: vr(0.5) vr(1);  // This half vr is irregular but needed.
-		border-top: 1px solid;
-		border-bottom: 1px solid;
-		line-height: vr(2);
+		padding: base-vr(0.5) base-vr(1);  // This half vr is irregular but needed.
+		@include font-size-level(1);
 		@include font-proportional;
+	}
 
-		border-top-color: $stile-table-color-rule-horizontal;
-		border-bottom-color: $stile-table-color-rule-horizontal;
+	tr:not(:last-child) {
+		th, td {
+			border-top: 1px solid;
+			border-bottom: 1px solid;
+			border-top-color: $stile-table-color-rule-horizontal;
+			border-bottom-color: $stile-table-color-rule-horizontal;
+		}
 	}
 
 	th:not(:first-child),
@@ -82,7 +87,6 @@ $stile-size-unit: 0.9rem !default;
 
 	thead td,
 	th {
-		font-size: 1rem;
 		@include font-bold;
 		text-align: center;
 
@@ -90,8 +94,10 @@ $stile-size-unit: 0.9rem !default;
 		background-color: $stile-table-color-header-background;
 	}
 
-	table:not([class]):not([data-stile ~= "no-neat-wrap"]) td {
-		white-space: nowrap;
+	table:not([class]):not([data-stile ~= "no-neat-wrap"]) {
+		td, th {
+			white-space: nowrap;
+		}
 	}
 
 	td p:not([class]) {
@@ -142,7 +148,7 @@ $stile-size-unit: 0.9rem !default;
 		overflow-x: auto;
 		overflow-y: hidden;  // for IE11 & Edge
 
-		height: calc(#{vr(1)} + 2px);  // for Safari
+		height: calc(#{base-vr(1)} + 2px);  // for Safari
 		border: 1px solid;  // for Safari
 
 		border: 1px solid rgba($stile-table-color-scrollbar-background, 0.1);  // for Safari
@@ -154,24 +160,23 @@ $stile-size-unit: 0.9rem !default;
 
 	table::-webkit-scrollbar,
 	div[data-stile ~= "fixed-table-scroll-bar"]::-webkit-scrollbar {
-		height: vr(1);
+		height: base-vr(1);
 		background-color: $stile-table-color-scrollbar-background;
 	}
 
 	div[data-stile ~= "fixed-table-scroll-bar"]::-webkit-scrollbar {
-		border-radius: vr(1) / 2;
+		border-radius: base-vr(1) / 2;
 	}
 
 	table::-webkit-scrollbar-thumb,
 	div[data-stile ~= "fixed-table-scroll-bar"]::-webkit-scrollbar-thumb {
-		border-radius: vr(1) / 2;
+		border-radius: base-vr(1) / 2;
 		background-color: $stile-table-color-scrollbar-thumb;
 	}
 
 	table, div[data-stile ~= "fixed-table-scroll-bar"] {  // for IE11
 		scrollbar-face-color: $stile-table-color-scrollbar-thumb;
 		scrollbar-shadow-color: $stile-table-color-scrollbar-thumb;
-		scrollbar-track-color: $stile-table-color-scrollbar-background;
 	}
 
 	// Enlarger ----------------------------------------------------------------
@@ -185,8 +190,8 @@ $stile-size-unit: 0.9rem !default;
 		div[data-stile ~= "enlarger-button"] {
 			position: absolute;
 			z-index: 999;
-			width: vr(1.5);
-			height: vr(1.5);
+			width: base-vr(1.5);
+			height: base-vr(1.5);
 			top: 0;
 			right: 0;
 			cursor: ew-resize;
@@ -199,5 +204,4 @@ $stile-size-unit: 0.9rem !default;
 			}
 		}
 	}
-
 }

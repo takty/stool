@@ -1,19 +1,20 @@
 /**
  *
- * Link Style
+ * Link Style (SCSS)
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2018-05-16
+ * @version 2018-06-25
  *
  */
 
 
-$stile-link-color-text:         rgba(#12f, 0.9) !default;
-$stile-link-color-text-visited: rgba(#609, 0.9) !default;
-$stile-link-color-bg:           rgba($stile-link-color-text, 0.05) !default;
+@import '../basic/base';
+@import '../basic/query';
+@import '../basic/font';
 
-$stile-size-unit: 0.9rem !default;
-@function vr($val) {@return $val * $stile-size-unit;}
+$stile-link-color-text        : rgba(#12f, 0.9) !default;
+$stile-link-color-text-visited: rgba(#609, 0.9) !default;
+$stile-link-color-bg          : rgba($stile-link-color-text, 0.05) !default;
 
 
 @mixin stile-link-mark {
@@ -24,12 +25,8 @@ $stile-size-unit: 0.9rem !default;
 	line-height: 1;
 	@include font-bold-cancel;
 
-	width: 1rem;
-	height: 1rem;
 	overflow: hidden;  // for removing underline on IE11
-
 	transform: translateY(0.1rem);
-	@include for-firefox { transform: translateY(0.2rem); }
 }
 
 @mixin stile-link-mark-anchor {
@@ -49,6 +46,7 @@ $stile-size-unit: 0.9rem !default;
 		&[href ^= 'http']:empty::before {
 			text-decoration: none;
 			color: $stile-link-color-text;
+			word-wrap: break-word;  // for URL in text
 
 			margin-left: 0.075rem;
 			margin-right: 0.075rem;
@@ -91,5 +89,4 @@ $stile-size-unit: 0.9rem !default;
 	a[data-stile ~= 'link-image'] {
 		> img { vertical-align: middle; }
 	}
-
 }

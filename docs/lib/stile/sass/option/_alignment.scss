@@ -1,19 +1,17 @@
 /**
  *
- * Classes for Alignments
+ * Alignment Classes (SCSS)
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2018-05-16
+ * @version 2018-06-28
  *
  */
 
 
+@import '../basic/base';
 @import '../basic/query';
 
 $stile-alignment-size-min-text-width: 16rem !default;
-
-$stile-size-unit: 0.9rem !default;
-@function vr($val) {@return $val * $stile-size-unit;}
 
 
 @mixin stile-alignment {
@@ -69,19 +67,22 @@ $stile-size-unit: 0.9rem !default;
 
 	// By Content Query --------------------------------------------------------
 
+	*[data-stile ~= 'alignleft'],
+	*[data-stile ~= 'alignright'] {
+		margin-top: 0;
+		margin-bottom: base-vr(1);
+		max-width: calc(100% - #{$stile-alignment-size-min-text-width});
+		transform: translateY(#{(base-vr(2) - 1rem) / 2});
+	}
 	*[data-stile ~= 'alignleft'] {
 		float: left;
 		margin-left: auto;
-		margin-right: vr(2);
-		transform: translateY(#{(vr(2) - 1rem) / 2});
-		max-width: calc(100% - #{$stile-alignment-size-min-text-width});
+		margin-right: base-vr(2);
 	}
 	*[data-stile ~= 'alignright'] {
 		float: right;
-		margin-left: vr(2);
+		margin-left: base-vr(2);
 		margin-right: auto;
-		transform: translateY(#{(vr(2) - 1rem) / 2});
-		max-width: calc(100% - #{$stile-alignment-size-min-text-width});
 	}
 	*[data-stile ~= 'aligncenter'] {
 		&.alignleft,
@@ -97,9 +98,7 @@ $stile-size-unit: 0.9rem !default;
 @mixin stile-alignment-center {
 	display: block;
 	float: none;
-	margin-left: auto;
-	margin-right: auto;
-	margin-bottom: vr(1);  // for these classes specific!
+	margin: base-vr(2) auto;
 	transform: initial;
 	text-align: center;
 	clear: both;
@@ -108,21 +107,22 @@ $stile-size-unit: 0.9rem !default;
 @mixin stile-alignment-float($max-width: false) {
 	&.alignleft,
 	&.alignright {
+		margin-top: 0;
+		margin-bottom: base-vr(1);
 		@if $max-width == false {
-			max-width: calc(100% - #{$stile-alignment-size-min-text-width});
-		} @else {
-			max-width: $max-width;
+			$max-width: calc(100% - #{$stile-alignment-size-min-text-width});
 		}
-		transform: translateY(#{(vr(2) - 1rem) / 2});
+		max-width: $max-width;
+		transform: translateY(#{(base-vr(2) - 1rem) / 2});
 		clear: none;
 	}
 	&.alignleft {
 		float: left;
-		margin-right: vr(2);
+		margin-right: base-vr(2);
 	}
 	&.alignright {
 		float: right;
-		margin-left: vr(2);
+		margin-left: base-vr(2);
 	}
 }
 
@@ -135,14 +135,14 @@ $stile-size-unit: 0.9rem !default;
 	* + .alignright,
 	.alignleft + *,
 	.alignright + * {
-		margin-top: vr(1);
+		margin-top: base-vr(1);
 	}
 
 	* + figure.alignleft,
 	* + figure.alignright,
 	figure.alignleft + *,
 	figure.alignright + * {
-		margin-top: vr(4);  // for Centering View
+		margin-top: base-vr(4);  // for Centering View
 	}
 
 	@include for-tablet-up {
@@ -150,7 +150,7 @@ $stile-size-unit: 0.9rem !default;
 		* + figure.alignright,
 		figure.alignleft + *,
 		figure.alignright + * {
-			margin-top: vr(1);  // for Actual Floating View
+			margin-top: base-vr(1);  // for Actual Floating View
 		}
 	}
 
@@ -163,7 +163,7 @@ $stile-size-unit: 0.9rem !default;
 }
 
 @mixin stile-alignment-define-figure-margin($tag, $top) {
-	#{$tag} { & + figure.alignright, & + figure.alignleft { margin-top: vr($top); } }
+	#{$tag} { & + figure.alignright, & + figure.alignleft { margin-top: base-vr($top); } }
 }
 
 

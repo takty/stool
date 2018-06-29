@@ -3,10 +3,14 @@
  * Inline Style
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2018-05-20
+ * @version 2018-06-26
  *
  */
 
+
+@import '../basic/base';
+@import '../basic/font';
+@import '../basic/layout';
 
 $stile-inline-color-strong       : rgba(#000, 0.95) !default;
 $stile-inline-color-underline    : rgba(#fd0, 0.9) !default;
@@ -15,13 +19,10 @@ $stile-inline-color-abbr         : rgba(#12f, 0.9) !default;
 $stile-inline-color-broken-image : $stile-inline-color-del !default;
 $stile-inline-size-font-small    : 0.85em !default;
 $stile-inline-size-font-subscript: 0.75em !default;
-
-$stile-size-unit: 0.9rem !default;
-@function vr($val) {@return $val * $stile-size-unit;}
+$stile-inline-size-font-monospace: 0.95em !default;
 
 
 @mixin stile-inline {
-
 	img {
 		max-width: 100%;
 		height: auto;
@@ -31,13 +32,13 @@ $stile-size-unit: 0.9rem !default;
 			content: attr(src);
 			@include layout-centering(true);
 
-			padding: vr(0.5) vr(1);
+			padding: base-vr(0.5) base-vr(1);
 			border: 1px dashed $stile-inline-color-broken-image;
-			min-height: vr(2);
-			line-height: vr(1.5);
-
+			min-height: base-vr(2);
+			
 			color: $stile-inline-color-broken-image;
-			font-size: 0.85rem;
+			font-size: 0.85em;
+			line-height: 1.35em;
 			word-break: break-all;
 			text-decoration: line-through;
 
@@ -109,7 +110,7 @@ $stile-size-unit: 0.9rem !default;
 		margin-left: 0.075rem;
 		margin-right: 0.075rem;
 		white-space: pre-wrap;
-		font-size: 0.95em;
+		font-size: $stile-inline-size-font-monospace;
 	}
 
 	*[data-stile ~= 'iframe-wrapper'] {
@@ -117,8 +118,8 @@ $stile-size-unit: 0.9rem !default;
 		width: 100%;
 		position: relative;
 		> iframe {
-			@include layout-fill;
+			@include layout-fill-self;
+			height: 100%;
 		}
 	}
-
 }
