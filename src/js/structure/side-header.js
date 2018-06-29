@@ -106,7 +106,9 @@ document.addEventListener('DOMContentLoaded', function () {
 	function turnOffFixed(tar) {
 		if (tar.cur_state) tar.entry.classList.remove(tar.cur_state);
 		tar.cur_state = false;
-		tar.entry.removeChild(tar.dummy_header);
+		if (tar.dummy_header.parentNode === tar.entry) {
+			tar.entry.removeChild(tar.dummy_header);
+		}
 		tar.entry.insertBefore(tar.header, tar.content);
 		tar.header.style.maxWidth = '';
 	}
