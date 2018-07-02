@@ -3,7 +3,7 @@
  * Editor Style
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2018-06-25
+ * @version 2018-07-02
  *
  * @import 'stile/sass/basic';
  * @import 'stile/sass/content';
@@ -12,9 +12,9 @@
  */
 
 
-@import '../lib/stool/sass/decoration';
-@import '../lib/stool/sass/element';
-@import '../lib/stool/sass/util';
+@import '../decoration';
+@import '../element';
+@import '../util';
 
 $editor-color          : #bce !default;
 $editor-size-text-width: 48rem !default;
