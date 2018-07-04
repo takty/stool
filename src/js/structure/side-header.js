@@ -3,7 +3,7 @@
  * Side Header (JS)
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2018-06-29
+ * @version 2018-07-02
  *
  */
 
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	const CLS_ENTRY_HEAD = 'st-side-header-entry-header';
 	const CLS_ENTRY_CONT = 'st-side-header-entry-content';
 
-	const getSiteHeaderOffset = makeOffsetFunction(CLS_STICKY_ELM, CLS_STICKY_ELM_TOP);
+	const getSiteHeaderOffset = ST.makeOffsetFunction(CLS_STICKY_ELM, CLS_STICKY_ELM_TOP);
 	const tars = collectElements();
 
 	let wpabH = 0;
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			}
 			setTimeout(function () {
 				for (let i = 0; i < tars.length; i += 1) updateFixed(tars[i]);
-				wpabH = getWpAdminBarHeight();
+				wpabH = ST.getWpAdminBarHeight();
 				shH   = getSiteHeaderOffset();
 				scrollAF();
 			}, 0);
@@ -149,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 
 	function getState(tar, pageYOffset, siteHeaderH) {
-		const viewY = pageYOffset + siteHeaderH;
+		const viewY = pageYOffset + siteHeaderH + wpabH;
 		const tarB = tar.entry.getBoundingClientRect();
 		const entryY = tarB.top + pageYOffset, entryY2 = entryY + tar.entry.clientHeight;
 		const headH = tar.header.clientHeight;
@@ -164,26 +164,26 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	// Utilities ---------------------------------------------------------------
 
-	function makeOffsetFunction(fixedElementClass, fixedHeightClass) {
-		let elmFixed = document.getElementsByClassName(fixedElementClass);
-		if (elmFixed && elmFixed.length > 0) {
-			elmFixed = elmFixed[0];
-			let elmHeight = document.getElementsByClassName(fixedHeightClass);
-			if (elmHeight) elmHeight = elmHeight[0];
-			else elmHeight = elmFixed;
+	// function makeOffsetFunction(fixedElementClass, fixedHeightClass) {
+	// 	let elmFixed = document.getElementsByClassName(fixedElementClass);
+	// 	if (elmFixed && elmFixed.length > 0) {
+	// 		elmFixed = elmFixed[0];
+	// 		let elmHeight = document.getElementsByClassName(fixedHeightClass);
+	// 		if (elmHeight) elmHeight = elmHeight[0];
+	// 		else elmHeight = elmFixed;
 
-			return function () {
-				const pos = getComputedStyle(elmFixed).position;
-				return pos === 'fixed' ? elmHeight.clientHeight : 0;
-			};
-		}
-		return function () { return 0; }
-	}
+	// 		return function () {
+	// 			const pos = getComputedStyle(elmFixed).position;
+	// 			return pos === 'fixed' ? elmHeight.clientHeight : 0;
+	// 		};
+	// 	}
+	// 	return function () { return 0; }
+	// }
 
-	function getWpAdminBarHeight() {
-		const wpab = document.getElementById('wpadminbar');
-		return wpab ? wpab.clientHeight : 0;
-	}
+	// function getWpAdminBarHeight() {
+	// 	const wpab = document.getElementById('wpadminbar');
+	// 	return wpab ? wpab.clientHeight : 0;
+	// }
 
 	function doBeforePrint(func, forceMediaCheck = true) {
 		window.addEventListener('beforeprint', func, false);
