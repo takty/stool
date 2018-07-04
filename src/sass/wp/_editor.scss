@@ -3,7 +3,7 @@
  * Editor Style
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2018-07-02
+ * @version 2018-07-04
  *
  * @import 'stile/sass/basic';
  * @import 'stile/sass/content';
@@ -75,7 +75,7 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 @mixin stool-editor-link {
 
 	a:not([class]) {
-		color: $inline-color-link-text;
+		color: $stile-link-color-text;
 		text-decoration: underline;
 	}
 
