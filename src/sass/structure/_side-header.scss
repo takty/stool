@@ -3,7 +3,7 @@
  * Side Header (SCSS)
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2018-06-29
+ * @version 2018-08-16
  *
  * @import 'lib/stile/sass/basic/query';
  *
@@ -11,6 +11,7 @@
 
 
 $side-header-size-text-width            : 48rem !default;
+$side-header-size-header-min-width      : 28rem !default;
 $side-header-size-horizontal-margin     : 2rem !default;
 $side-header-size-vertical-margin       : 2rem !default;
 $side-header-size-vertical-margin-phone : 1rem !default;
@@ -29,11 +30,16 @@ $side-header-size-vertical-padding-phone: 1rem !default;
 	margin-right: auto;
 	max-width: $side-header-size-text-width;
 	width: 100%;
+	// flex-grow: 1;
+}
+
+.st-side-header-entry-header-spacer {
+	position: relative;
+	overflow: hidden;
+	min-width: $side-header-size-header-min-width;
 }
 
 .st-side-header-entry-header {
-	flex-grow: 1;
-
 	@include for-phone-only  { padding-top: $side-header-size-vertical-padding-phone; }
 	@include for-tablet-only { padding-top: $side-header-size-vertical-padding; }
 	@include for-desktop-up  { padding:     $side-header-size-vertical-padding 0; }
@@ -52,7 +58,7 @@ $side-header-size-vertical-padding-phone: 1rem !default;
 }
 
 .st-side-header-entry-content {
-	flex-shrink: 0;
+	flex-grow: 1;
 
 	@include for-phone-only  { padding-bottom: $side-header-size-vertical-padding-phone; }
 	@include for-tablet-only { padding-bottom: $side-header-size-vertical-padding; }

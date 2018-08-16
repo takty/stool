@@ -3,7 +3,7 @@
  * Side Header (JS)
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2018-07-02
+ * @version 2018-08-16
  *
  */
 
@@ -60,10 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			if (!eh || !ec) continue;
 
 			const d = document.createElement('div');
-			d.style.position = 'relative';
-			d.style.overflow = 'hidden';
-			d.style.flexGrow = 1;
-			d.style.width = '100%';
+			d.classList.add('st-side-header-entry-header-spacer');
 
 			ret.push({entry: e, header: eh, content: ec, dummy_header: d, cur_state: false});
 		}
@@ -163,27 +160,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 	// Utilities ---------------------------------------------------------------
-
-	// function makeOffsetFunction(fixedElementClass, fixedHeightClass) {
-	// 	let elmFixed = document.getElementsByClassName(fixedElementClass);
-	// 	if (elmFixed && elmFixed.length > 0) {
-	// 		elmFixed = elmFixed[0];
-	// 		let elmHeight = document.getElementsByClassName(fixedHeightClass);
-	// 		if (elmHeight) elmHeight = elmHeight[0];
-	// 		else elmHeight = elmFixed;
-
-	// 		return function () {
-	// 			const pos = getComputedStyle(elmFixed).position;
-	// 			return pos === 'fixed' ? elmHeight.clientHeight : 0;
-	// 		};
-	// 	}
-	// 	return function () { return 0; }
-	// }
-
-	// function getWpAdminBarHeight() {
-	// 	const wpab = document.getElementById('wpadminbar');
-	// 	return wpab ? wpab.clientHeight : 0;
-	// }
 
 	function doBeforePrint(func, forceMediaCheck = true) {
 		window.addEventListener('beforeprint', func, false);
