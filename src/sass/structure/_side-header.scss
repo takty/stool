@@ -18,6 +18,9 @@ $side-header-size-vertical-margin-phone : 1rem !default;
 $side-header-size-vertical-padding      : 2rem !default;
 $side-header-size-vertical-padding-phone: 1rem !default;
 
+$side-header-size-wide-text-width       : 56rem !default;
+$side-header-size-wide-header-min-width : 20rem !default;
+
 
 .st-side-header-entry {
 	position: relative;
@@ -44,6 +47,23 @@ $side-header-size-vertical-padding-phone: 1rem !default;
 	overflow: hidden;
 	width: calc(100% - #{$side-header-size-horizontal-margin} - #{$side-header-size-text-width});
 	min-width: $side-header-size-header-min-width;
+}
+
+.st-side-header-entry.wide {
+	.st-side-header-entry-header,
+	.st-side-header-entry-content {
+		max-width: $side-header-size-wide-text-width;
+	}
+	> .st-side-header-entry-header {
+		@include for-desktop-up {
+			// for reducing unexpected resizing
+			width: calc(100% - #{$side-header-size-horizontal-margin} - #{$side-header-size-wide-text-width});
+		}
+	}
+	.st-side-header-entry-header-spacer {
+		width: calc(100% - #{$side-header-size-horizontal-margin} - #{$side-header-size-wide-text-width});
+		min-width: $side-header-size-wide-header-min-width;
+	}
 }
 
 .st-side-header-entry-header {
