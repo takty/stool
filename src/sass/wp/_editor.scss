@@ -17,7 +17,7 @@
 @import '../util';
 
 $editor-color          : #bce !default;
-$editor-color-container: #dad !default;
+$editor-color-container: #c4c !default;
 $editor-size-text-width: 48rem !default;
 $editor-size-font      : 0.85rem !default;
 
@@ -129,7 +129,7 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 		}
 		> * {
 			padding: 1rem 0.5rem;
-			border: dashed 1px $editor-color-container;
+			border: dotted 1px $editor-color-container;
 			@include _child_margin;
 		}
 	}
@@ -165,7 +165,7 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 
 	.tab-page {
 		padding: 1rem 0.5rem;
-		border: dashed 1px $editor-color-container;
+		border: dotted 1px $editor-color-container;
 		@include _child_margin;
 
 		position: relative;
@@ -194,7 +194,7 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 	}
 
 	div.clear {
-		border: dashed 1px $editor-color-container;
+		border: dotted 1px $editor-color-container;
 		clear: both;
 		&::after {
 			content: 'Clear Float';
