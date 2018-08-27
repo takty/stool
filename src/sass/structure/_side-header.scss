@@ -52,7 +52,7 @@ $side-header-size-wide-header-min-width : 20rem !default;
 .st-side-header-entry.wide {
 	.st-side-header-entry-header,
 	.st-side-header-entry-content {
-		max-width: $side-header-size-wide-text-width;
+		max-width: 100%;
 	}
 	> .st-side-header-entry-header {
 		@include for-desktop-up {
