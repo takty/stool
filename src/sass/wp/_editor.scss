@@ -3,7 +3,7 @@
  * Editor Style
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2018-07-04
+ * @version 2018-08-27
  *
  * @import 'stile/sass/basic';
  * @import 'stile/sass/content';
@@ -17,6 +17,7 @@
 @import '../util';
 
 $editor-color          : #bce !default;
+$editor-color-container: #dad !default;
 $editor-size-text-width: 48rem !default;
 $editor-size-font      : 0.85rem !default;
 
@@ -121,14 +122,14 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 			position: absolute;
 			top: 0;
 			left: 0;
-			color: $editor-color;
+			color: $editor-color-container;
 			background-color: #fff;
 			font-size: $editor-size-font;
 			line-height: 1;
 		}
 		> * {
-			padding: 1rem;
-			border: dashed 1px $editor-color;
+			padding: 1rem 0.5rem;
+			border: dashed 1px $editor-color-container;
 			@include _child_margin;
 		}
 	}
@@ -163,8 +164,8 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 	// Tab Page ----------------------------------------------------------------
 
 	.tab-page {
-		padding: 1rem;
-		border: dashed 1px $editor-color;
+		padding: 1rem 0.5rem;
+		border: dashed 1px $editor-color-container;
 		@include _child_margin;
 
 		position: relative;
@@ -173,7 +174,7 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 			position: absolute;
 			top: -1px;
 			left: -1px;
-			color: $editor-color;
+			color: $editor-color-container;
 			background-color: #fff;
 			font-size: $editor-size-font;
 			line-height: 1;
@@ -193,11 +194,11 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 	}
 
 	div.clear {
-		border: dashed 1px $editor-color;
+		border: dashed 1px $editor-color-container;
 		clear: both;
 		&::after {
 			content: 'Clear Float';
-			color: $editor-color;
+			color: $editor-color-container;
 			font-size: $editor-size-font;
 		}
 	}
