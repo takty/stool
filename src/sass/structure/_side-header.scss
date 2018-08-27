@@ -34,7 +34,7 @@ $side-header-size-vertical-padding-phone: 1rem !default;
 
 .st-side-header-entry > .st-side-header-entry-header {
 	@include for-desktop-up {
-		// for reducing unexped resizing
+		// for reducing unexpected resizing
 		width: calc(100% - #{$side-header-size-horizontal-margin} - #{$side-header-size-text-width});
 	}
 }
