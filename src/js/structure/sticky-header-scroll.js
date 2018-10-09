@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				if (ts[i].indexOf('version') !== -1) {
 					const ss = ts[i].split('/');
 					if (1 < ss.length) {
-						const v = parseFloat(ss[1]);
+						const v = parseInt(ss[1]);
 						if (v <= 10) return false;
 					}
 				}
