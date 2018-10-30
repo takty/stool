@@ -3,7 +3,7 @@
  * Editor Style
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2018-08-27
+ * @version 2018-10-30
  *
  * @import 'stile/sass/basic';
  * @import 'stile/sass/content';
@@ -25,26 +25,26 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 @function vr($val) {@return $val * $stile-size-unit;}
 
 
-@mixin _child_margin {
-	> * + * { margin-top: vr(2); }
-	> *:first-child { margin-top: 0; }
-}
+@mixin stool-editor($inside-body: true) {
+	@if $inside-body {
+		body {
+			@include font-family;
+			@include font-visible-chrome;
 
-@mixin stool-editor {
+			margin: vr(1) auto vr(1) vr(1);
+			max-width: $editor-size-text-width;
+			width: calc(100% - #{vr(2)});
 
-	body {
+			@include stool-editor-child-margin;
+		}
+	} @else {
 		@include font-family;
 		@include font-visible-chrome;
-
-		margin: vr(1) auto vr(1) vr(1);
-		max-width: $editor-size-text-width;
-		width: calc(100% - #{vr(2)});
-
-		@include _child_margin;
+		@include stool-editor-child-margin;
 	}
 
 	blockquote {
-		@include _child_margin;
+		@include stool-editor-child-margin;
 	}
 
 	p, ul, ol, dl { border: dashed 1px $editor-color; }
@@ -61,6 +61,11 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 	@include stool-editor-table;
 	@include stool-editor-option;
 	@include stool-editor-class;
+}
+
+@mixin stool-editor-child-margin {
+	> * + * { margin-top: vr(2); }
+	> *:first-child { margin-top: 0; }
 }
 
 @mixin stool-editor-heading {
@@ -130,7 +135,7 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 		> * {
 			padding: 1rem 0.5rem;
 			border: dotted 1px $editor-color-container;
-			@include _child_margin;
+			@include stool-editor-child-margin;
 		}
 	}
 	.column-2::before { content: 'Column 2'; }
@@ -166,7 +171,7 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 	.tab-page {
 		padding: 1rem 0.5rem;
 		border: dotted 1px $editor-color-container;
-		@include _child_margin;
+		@include stool-editor-child-margin;
 
 		position: relative;
 		&::before {
@@ -190,7 +195,7 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 		padding: vr(2);
 		line-height: vr(2);
 
-		@include _child_margin;
+		@include stool-editor-child-margin;
 	}
 
 	div.clear {
