@@ -1,0 +1,56 @@
+/**
+ *
+ * Styles of WordPress Block Editor
+ *
+ * @author Takuto Yanagida @ Space-Time Inc.
+ * @version 2018-11-05
+ *
+ */
+
+
+@mixin stool-block {
+
+	 .wp-block-pullquote {
+		border-top: $stile-block-size-line-width solid $stile-block-color-line;
+		border-bottom: $stile-block-size-line-width solid $stile-block-color-line;
+
+		blockquote {
+			border: none;
+			padding-left: 0;
+			padding-right: 0;
+			margin-bottom: 0;
+			&::before {
+				display: none;
+			}
+		}
+		p {
+			@include font-size-level(4);
+		}
+	}
+
+	.wp-block-categories {
+		li { text-align: left; }
+	}
+
+	.wp-block-image {
+		@include stile-block-figure;
+	}
+
+	.wp-block-quote {
+		border: none;
+		padding-left: base-vr(4);
+		padding-right: 0;
+		margin-bottom: 0;
+	}
+
+	> * + *.wp-block-quote {
+		margin-top: base-vr(2);
+	}
+
+	.wp-block-archives,
+	.wp-block-categories,
+	.wp-block-latest-posts {
+		@include stile-list-ul-inside;
+	}
+
+}
