@@ -3,7 +3,7 @@
  * Editor Style
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2018-10-30
+ * @version 2018-11-05
  *
  * @import 'stile/sass/basic';
  * @import 'stile/sass/content';
@@ -25,10 +25,10 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 @function vr($val) {@return $val * $stile-size-unit;}
 
 
-@mixin stool-editor($inside-body: true) {
+@mixin stool-editor($inside-body: true, $custom-font: false) {
 	@if $inside-body {
 		body {
-			@include font-family;
+			@include font-family($custom-font);
 			@include font-visible-chrome;
 
 			margin: vr(1) auto vr(1) vr(1);
@@ -38,7 +38,7 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 			@include stool-editor-child-margin;
 		}
 	} @else {
-		@include font-family;
+		@include font-family($custom-font);
 		@include font-visible-chrome;
 		@include stool-editor-child-margin;
 	}
