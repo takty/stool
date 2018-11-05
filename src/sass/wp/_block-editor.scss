@@ -25,7 +25,7 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 @function vr($val) {@return $val * $stile-size-unit;}
 
 
-@mixin stool-editor($inside-body: true) {
+@mixin stool-block-editor($inside-body: true) {
 	// @if $inside-body {
 	// 	body {
 	// 		@include font-family;
