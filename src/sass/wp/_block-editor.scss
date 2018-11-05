@@ -25,34 +25,80 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 @function vr($val) {@return $val * $stile-size-unit;}
 
 
-@mixin stool-block-editor($inside-body: true) {
-	// @if $inside-body {
-	// 	body {
-	// 		@include font-family;
-	// 		@include font-visible-chrome;
-
-	// 		margin: vr(1) auto vr(1) vr(1);
-	// 		max-width: $editor-size-text-width;
-	// 		width: calc(100% - #{vr(2)});
-
-	// 		@include stool-editor-child-margin;
-	// 	}
-	// } @else {
-	// 	@include font-family;
-	// 	@include font-visible-chrome;
-	// 	@include stool-editor-child-margin;
-	// }
-
+@mixin stool-block-editor() {
 	blockquote {
 		@include stool-editor-child-margin;
 	}
+	.wp-block-image {
+		@include stile-block-figure;
+	}
 
-	p, ul, ol, dl { border: dashed 1px $editor-color; }
+	.wp-block-quote {
+		border: none;
+		padding-left: base-vr(4);
+		padding-right: 0;
+		margin-bottom: 0;
+	}
+	.wp-block-quote__citation {
+		@include font-size-level(1);
+	}
+
+	> * + *.wp-block-quote {
+		margin-top: base-vr(2);
+	}
+
+	.wp-block-categories {
+		li { text-align: left; }
+	}
+
+	.wp-block-pullquote {
+		border-top: $stile-block-size-line-width solid $stile-block-color-line;
+		border-bottom: $stile-block-size-line-width solid $stile-block-color-line;
+
+		blockquote {
+			border: none;
+			padding-left: 0;
+			padding-right: 0;
+			margin-bottom: 0;
+			&::before {
+				display: none;
+			}
+		}
+		p {
+			@include font-size-level(4);
+		}
+	}
+
+	.wp-block-pullquote__citation,
+	.wp-block-pullquote cite,
+	.wp-block-pullquote footer {
+		@include font-size-level(1);
+		text-transform: none;
+	}
+
+	&[data-align=center] > .editor-block-list__block-edit > div {
+		text-align: center;
+	}
+	// .wp-block-quote:not(.is-large):not(.is-style-large) {
+	// 	border: none;
+	// 	padding-left: base-vr(4);
+	// }
+
+	// p, ul, ol, dl { border: dashed 1px $editor-color; }
 
 	// From Stile Content
 	@include stile-block-main;
 	@include stile-inline;
-	@include stile-list;
+	// @include stile-list;
+// class="editor-rich-text__tinymce mce-content-body"
+
+	ul:not(.wp-block-gallery), ul.stile { @include stile-list-ul-inside }
+	ol:not(.wp-block-gallery), ol.stile { @include stile-list-ol-inside; }
+	dl:not(.wp-block-gallery), dl.stile { @include stile-list-dl-inside; }
+	ul:not(.wp-block-gallery) > li + li { margin-top: base-vr(1); }
+	ol:not(.wp-block-gallery) > li + li::before { padding-top: base-vr(1); }
+	li > ul, li > ol, li > dl, dd > ul, dd > ol, dd > dl { margin-top: base-vr(1); }  // for nesting Lists
+
 	// From Stile Option
 	@include stile-container;
 
@@ -69,31 +115,25 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 }
 
 @mixin stool-editor-heading {
-
 	h3:not(:first-child) { margin-top: 3rem; }
 	h4:not(:first-child) { margin-top: 1.5rem; }
 	h5:not(:first-child) { margin-top: 1rem; }
 
 	h2, h3, h4, h5, h6, hr { clear: both; }
-
 }
 
 @mixin stool-editor-link {
-
 	a:not([class]) {
 		color: $stile-link-color-text;
 		text-decoration: underline;
 	}
-
 }
 
 @mixin stool-editor-table {
-
 	td {
 		min-width: 1rem;
 		padding: 0.25rem;
 	}
-
 }
 
 @mixin stool-editor-option {
@@ -189,7 +229,6 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 }
 
 @mixin stool-editor-class {
-
 	div.frame {
 		background-color: $stile-block-color-shade;
 		padding: vr(2);
@@ -197,7 +236,6 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 
 		@include stool-editor-child-margin;
 	}
-
 	div.clear {
 		border: dotted 1px $editor-color-container;
 		clear: both;
@@ -207,5 +245,4 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 			font-size: $editor-size-font;
 		}
 	}
-
 }
