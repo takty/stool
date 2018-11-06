@@ -1,0 +1,20 @@
+/**
+ *
+ * Text Styles
+ *
+ * @author Takuto Yanagida @ Space-Time Inc.
+ * @version 2018-11-06
+ *
+ */
+
+
+@charset 'utf-8';
+
+
+@mixin stool-text-outline($color, $offset: 1px, $blur: 2px) {
+	text-shadow:
+		$color $offset  $offset $blur, $color -$offset  $offset $blur,
+		$color $offset -$offset $blur, $color -$offset -$offset $blur,
+		$color 0        $offset $blur, $color -$offset  0       $blur,
+		$color 0       -$offset $blur, $color  $offset  0       $blur;
+}
