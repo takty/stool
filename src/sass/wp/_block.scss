@@ -15,8 +15,57 @@ $stool-block-color-cover-text          : #fff !default;
 
 
 @mixin stool-block {
+	@include stool-block-quote;
+	@include stool-block-pullquote;
 
-	 .wp-block-pullquote {
+	.wp-block-categories {
+		li { text-align: left; }
+	}
+
+	.wp-block-image {
+		@include stile-block-figure;
+	}
+
+	.wp-block-archives,
+	.wp-block-categories,
+	.wp-block-latest-posts {
+		@include stile-list-ul-inside;
+	}
+
+	.wp-block-cover .wp-block-cover-image-text,
+	.wp-block-cover .wp-block-cover-text,
+	.wp-block-cover h2 {
+		@include font-size-level($stool-block-level-cover-text);
+		color: $stool-block-color-cover-text;
+		margin-bottom: 0;
+		max-width: 40rem;
+		padding: 1rem;
+		text-align: center;
+		z-index: 1;
+	}
+
+}
+
+@mixin stool-block-quote {
+	blockquote {
+		@include stool-editor-child-margin;
+	}
+	.wp-block-quote {
+		border: none;
+		padding-left: base-vr(4);
+		padding-right: 0;
+		margin-bottom: 0;
+	}
+	> * + *.wp-block-quote {
+		margin-top: base-vr(2);
+	}
+	.wp-block-quote__citation {
+		@include font-size-level(1);
+	}
+}
+
+@mixin stool-block-pullquote {
+	.wp-block-pullquote {
 		&:not(.is-style-solid-color) {
 			border-top: $stile-block-size-line-width solid $stile-block-color-line;
 			border-bottom: $stile-block-size-line-width solid $stile-block-color-line;
@@ -41,42 +90,10 @@ $stool-block-color-cover-text          : #fff !default;
 			@include font-size-level($stool-block-level-pullquote-text);
 		}
 	}
-
-	.wp-block-categories {
-		li { text-align: left; }
+	.wp-block-pullquote__citation,
+	.wp-block-pullquote cite,
+	.wp-block-pullquote footer {
+		@include font-size-level(1);
+		text-transform: none;
 	}
-
-	.wp-block-image {
-		@include stile-block-figure;
-	}
-
-	.wp-block-quote {
-		border: none;
-		padding-left: base-vr(4);
-		padding-right: 0;
-		margin-bottom: 0;
-	}
-
-	> * + *.wp-block-quote {
-		margin-top: base-vr(2);
-	}
-
-	.wp-block-archives,
-	.wp-block-categories,
-	.wp-block-latest-posts {
-		@include stile-list-ul-inside;
-	}
-
-	.wp-block-cover .wp-block-cover-image-text,
-	.wp-block-cover .wp-block-cover-text,
-	.wp-block-cover h2 {
-		@include font-size-level($stool-block-level-cover-text);
-		color: $stool-block-color-cover-text;
-		margin-bottom: 0;
-		max-width: 40rem;
-		padding: 1rem;
-		text-align: center;
-		z-index: 1;
-	}
-
 }
