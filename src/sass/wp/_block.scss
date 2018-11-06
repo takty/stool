@@ -3,17 +3,24 @@
  * Styles of WordPress Block Editor
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2018-11-05
+ * @version 2018-11-06
  *
  */
+
+
+$stool-block-level-pullquote-text      : $stile-design-level-blockquote-text-large !default;
+$stool-block-color-pullquote-background: rgba($stile-block-color-line, 0.25) !default;
+$stool-block-level-cover-text          : 5 !default;
+$stool-block-color-cover-text          : #fff !default;
 
 
 @mixin stool-block {
 
 	 .wp-block-pullquote {
-		border-top: $stile-block-size-line-width solid $stile-block-color-line;
-		border-bottom: $stile-block-size-line-width solid $stile-block-color-line;
-
+		&:not(.is-style-solid-color) {
+			border-top: $stile-block-size-line-width solid $stile-block-color-line;
+			border-bottom: $stile-block-size-line-width solid $stile-block-color-line;
+		}
 		blockquote {
 			border: none;
 			padding-left: 0;
@@ -23,8 +30,15 @@
 				display: none;
 			}
 		}
+		&.is-style-solid-color {
+			background-color: $stool-block-color-pullquote-background;
+			blockquote {
+				width: 60%;
+				min-width: $stile-alignment-size-min-text-width;
+			}
+		}
 		p {
-			@include font-size-level(4);
+			@include font-size-level($stool-block-level-pullquote-text);
 		}
 	}
 
@@ -51,6 +65,18 @@
 	.wp-block-categories,
 	.wp-block-latest-posts {
 		@include stile-list-ul-inside;
+	}
+
+	.wp-block-cover .wp-block-cover-image-text,
+	.wp-block-cover .wp-block-cover-text,
+	.wp-block-cover h2 {
+		@include font-size-level($stool-block-level-cover-text);
+		color: $stool-block-color-cover-text;
+		margin-bottom: 0;
+		max-width: 40rem;
+		padding: 1rem;
+		text-align: center;
+		z-index: 1;
 	}
 
 }
