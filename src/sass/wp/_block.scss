@@ -47,9 +47,9 @@ $stool-block-color-cover-text          : #fff !default;
 }
 
 @mixin stool-block-quote {
-	blockquote {
-		@include stool-editor-child-margin;
-	}
+	// blockquote {
+	// 	@include stool-editor-child-margin;
+	// }
 	.wp-block-quote {
 		border: none;
 		padding-left: base-vr(4);

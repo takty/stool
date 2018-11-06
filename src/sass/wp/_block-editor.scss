@@ -88,6 +88,47 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 		min-width: 1rem;
 		padding: 0.25rem;
 	}
+	thead, tbody:first-child, colgroup + tbody {
+		border-top: $stile-table-size-rule-horizontal-edge solid;
+		border-top-color: $stile-table-color-rule-horizontal-edge;
+
+		> tr:first-child {
+			th, td { border-top: none; }
+		}
+	}
+
+	tbody, tfoot {
+		border-bottom: $stile-table-size-rule-horizontal-edge solid;
+		border-bottom-color: $stile-table-color-rule-horizontal-edge;
+	}
+
+	th, td {
+		padding: base-vr(0.5) base-vr(1);  // This half vr is irregular but needed.
+		@include font-size-level(1);
+		@include font-proportional;
+
+		border: none;
+		border-top: 1px solid;
+		border-top-color: $stile-table-color-rule-horizontal;
+
+		&:not(:first-child) {
+			border-left: 1px solid;
+			border-left-color: $stile-table-color-rule-vertical;
+		}
+		&:first-child[rowspan] {
+			border-right: 1px solid;
+			border-right-color: $stile-table-color-rule-vertical;
+		}
+	}
+
+	thead td,
+	th {
+		@include font-bold;
+		text-align: center;
+
+		color: $stile-table-color-header-text;
+		background-color: $stile-table-color-header-background;
+	}
 }
 
 @mixin stool-editor-option {
