@@ -22,7 +22,7 @@ $editor-size-text-width: 48rem !default;
 $editor-size-font      : 0.85rem !default;
 
 $stile-size-unit: 0.9rem !default;  // Variable in stile
-@function vr($val) {@return $val * $stile-size-unit;}
+@function base-vr($val) {@return $val * $stile-size-unit;}
 
 
 @mixin stool-editor($inside-body: true, $custom-font: false) {
@@ -31,9 +31,9 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 			@include font-family($custom-font);
 			@include font-visible-chrome;
 
-			margin: vr(1) auto vr(1) vr(1);
+			margin: base-vr(1) auto base-vr(1) base-vr(1);
 			max-width: $editor-size-text-width;
-			width: calc(100% - #{vr(2)});
+			width: calc(100% - #{base-vr(2)});
 
 			@include stool-editor-child-margin;
 		}
@@ -64,7 +64,7 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 }
 
 @mixin stool-editor-child-margin {
-	> * + * { margin-top: vr(2); }
+	> * + * { margin-top: base-vr(2); }
 	> *:first-child { margin-top: 0; }
 }
 
@@ -192,8 +192,8 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 
 	div.frame {
 		background-color: $stile-block-color-background;
-		padding: vr(2);
-		line-height: vr(2);
+		padding: base-vr(2);
+		line-height: base-vr(2);
 
 		@include stool-editor-child-margin;
 	}
