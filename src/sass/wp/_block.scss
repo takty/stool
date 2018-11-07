@@ -3,13 +3,13 @@
  * Styles of WordPress Block Editor
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2018-11-06
+ * @version 2018-11-07
  *
  */
 
 
 $stool-block-level-pullquote-text      : $stile-design-level-blockquote-text-large !default;
-$stool-block-color-pullquote-background: rgba($stile-block-color-line, 0.25) !default;
+$stool-block-color-pullquote-background: rgba($stile-block-color-rule, 0.25) !default;
 $stool-block-level-cover-text          : 5 !default;
 $stool-block-color-cover-text          : #fff !default;
 
@@ -67,8 +67,8 @@ $stool-block-color-cover-text          : #fff !default;
 @mixin stool-block-pullquote {
 	.wp-block-pullquote {
 		&:not(.is-style-solid-color) {
-			border-top: $stile-block-size-line-width solid $stile-block-color-line;
-			border-bottom: $stile-block-size-line-width solid $stile-block-color-line;
+			border-top: $stile-block-size-line-width solid $stile-block-color-rule;
+			border-bottom: $stile-block-size-line-width solid $stile-block-color-rule;
 		}
 		blockquote {
 			border: none;
