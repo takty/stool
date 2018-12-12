@@ -3,7 +3,7 @@
  * Editor Style
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2018-11-07
+ * @version 2018-12-12
  *
  * @import 'stile/sass/basic';
  * @import 'stile/sass/content';
@@ -168,14 +168,14 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 
 	// Tab Page ----------------------------------------------------------------
 
-	.tab-page {
+	.tab-page,
+	.pseudo-tab-page {
 		padding: 1rem 0.5rem;
 		border: dotted 1px $editor-color-container;
 		@include stool-editor-child-margin;
 
 		position: relative;
 		&::before {
-			content: 'Tab Page';
 			position: absolute;
 			top: -1px;
 			left: -1px;
@@ -185,6 +185,9 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 			line-height: 1;
 		}
 	}
+
+	.tab-page::before { content: 'Tab Page'; }
+	.pseudo-tab-page::before { content: 'Pseudo Tab Page'; }
 
 }
 
