@@ -3,18 +3,27 @@
  * Form Styles
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2018-02-15
+ * @version 2018-02-21
  *
  */
 
 
-@mixin form-clear-appearance() {
+@mixin form-clear-appearance($clear_search_decoration: false) {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
-	&::-ms-expand { display: none; }
+
 	border: none;
 	border-radius: inherit;
+
+	&::-ms-expand { display: none; }
+
+	@if $clear_search_decoration == true {
+		&::-webkit-search-decoration {
+			-webkit-appearance: none;
+			appearance: none;
+		}
+	}
 }
 
 @mixin form-selector-label($size, $color, $right) {
