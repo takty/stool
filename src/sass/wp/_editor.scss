@@ -3,7 +3,7 @@
  * Editor Style
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2019-03-05
+ * @version 2019-04-19
  *
  * @import 'stile/sass/basic';
  * @import 'stile/sass/content';
@@ -165,6 +165,12 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 
 	.size-large {
 		width: 40rem;
+	}
+
+	.mceTemp > .wp-caption {
+		&.alignleft, &.alignright {
+			width: auto !important;
+		}
 	}
 
 
