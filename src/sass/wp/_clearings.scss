@@ -3,7 +3,7 @@
  * Clearing Style
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2018-01-11
+ * @version 2019-04-19
  *
  */
 
@@ -53,4 +53,9 @@
 .widget:after,
 .comment-meta:after {
 	clear: both;
+}
+
+div.clear {
+	margin-top: 0;
+	font-size: 0;
 }
