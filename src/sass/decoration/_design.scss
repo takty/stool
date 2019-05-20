@@ -1,0 +1,155 @@
+/**
+ *
+ * Design Classes (SCSS)
+ *
+ * @author Takuto Yanagida @ Space-Time Inc.
+ * @version 2019-05-20
+ *
+ */
+
+
+$stool-design-color-primary  : #007bff !default;
+$stool-design-color-secondary: #868e96 !default;
+$stool-design-color-light    : #f8f9fa !default;
+$stool-design-color-dark     : #343a40 !default;
+$stool-design-color-white    : #fff    !default;
+$stool-design-color-line     : #ddd    !default;
+
+$stool-design-bg-primary  : $stool-design-color-primary !default;
+$stool-design-bg-secondary: $stool-design-color-secondary !default;
+$stool-design-bg-light    : $stool-design-color-light !default;
+$stool-design-bg-dark     : $stool-design-color-dark !default;
+$stool-design-bg-white    : $stool-design-color-white !default;
+
+$stool-design-text-primary  : $stool-design-color-primary !default;
+$stool-design-text-secondary: $stool-design-color-secondary !default;
+$stool-design-text-light    : $stool-design-color-light !default;
+$stool-design-text-dark     : $stool-design-color-dark !default;
+$stool-design-text-white    : $stool-design-color-white !default;
+
+$stool-design-border-primary  : $stool-design-color-primary !default;
+$stool-design-border-secondary: $stool-design-color-secondary !default;
+$stool-design-border-light    : $stool-design-color-light !default;
+$stool-design-border-dark     : $stool-design-color-dark !default;
+$stool-design-border-white    : $stool-design-color-white !default;
+
+$stool-design-border-width : 2px;
+$stool-design-border-radius: 1px;
+
+
+@mixin stool-design {
+
+	.p-0  { padding       : base-vr(0.5); }
+	.pt-0 { padding-top   : base-vr(0.5); }
+	.pl-0 { padding-left  : base-vr(0.5); }
+	.pr-0 { padding-right : base-vr(0.5); }
+	.pb-0 { padding-bottom: base-vr(0.5); }
+	.px-0 { padding-left  : base-vr(0.5); padding-right : base-vr(0.5); }
+	.py-0 { padding-top   : base-vr(0.5); padding-bottom: base-vr(0.5); }
+	@for $i from 1 through 6 {
+		.p-#{$i}  { padding       : base-vr($i); }
+		.pt-#{$i} { padding-top   : base-vr($i); }
+		.pl-#{$i} { padding-left  : base-vr($i); }
+		.pr-#{$i} { padding-right : base-vr($i); }
+		.pb-#{$i} { padding-bottom: base-vr($i); }
+		.px-#{$i} { padding-left  : base-vr($i); padding-right : base-vr($i); }
+		.py-#{$i} { padding-top   : base-vr($i); padding-bottom: base-vr($i); }
+	}
+
+	.m-0  { margin       : base-vr(0.5); }
+	.mt-0 { margin-top   : base-vr(0.5); }
+	.ml-0 { margin-left  : base-vr(0.5); }
+	.mr-0 { margin-right : base-vr(0.5); }
+	.mb-0 { margin-bottom: base-vr(0.5); }
+	.mx-0 { margin-left  : base-vr(0.5); margin-right : base-vr(0.5); }
+	.my-0 { margin-top   : base-vr(0.5); margin-bottom: base-vr(0.5); }
+	@for $i from 1 through 6 {
+		.m-#{$i}  { margin       : base-vr($i); }
+		.mt-#{$i} { margin-top   : base-vr($i); }
+		.ml-#{$i} { margin-left  : base-vr($i); }
+		.mr-#{$i} { margin-right : base-vr($i); }
+		.mb-#{$i} { margin-bottom: base-vr($i); }
+		.mx-#{$i} { margin-left  : base-vr($i); margin-right : base-vr($i); }
+		.my-#{$i} { margin-top   : base-vr($i); margin-bottom: base-vr($i); }
+	}
+	.mx-auto { margin-left: auto; margin-right: auto; }
+
+	@for $i from 0 through 6 {
+		.wm-#{$i} { max-width: #{$i * 5}rem; }
+	}
+
+	@for $i from 0 through 6 {
+		.fs-#{$i} {@include font-size-level($i); }
+	}
+
+	.text-left   { text-align: left; }
+	.text-center { text-align: center; }
+	.text-right  { text-align: right; }
+
+	.bg-primary   { background-color: $stool-design-bg-primary; }
+	.bg-secondary { background-color: $stool-design-bg-secondary; }
+	.bg-light     { background-color: $stool-design-bg-light; }
+	.bg-dark      { background-color: $stool-design-bg-dark; }
+	.bg-white     { background-color: $stool-design-bg-white; }
+
+	.text-primary   { color: $stool-design-text-primary; }
+	.text-secondary { color: $stool-design-text-secondary; }
+	.text-light     { color: $stool-design-text-light; }
+	.text-dark      { color: $stool-design-text-dark; }
+	.text-white     { color: $stool-design-text-white; }
+
+	.border {
+		border: solid $stool-design-border-width $stool-design-color-line;
+		border-radius: $stool-design-border-radius;
+	}
+	.border-primary   { border-color: $stool-design-border-primary; }
+	.border-secondary { border-color: $stool-design-border-secondary; }
+	.border-light     { border-color: $stool-design-border-light; }
+	.border-dark      { border-color: $stool-design-border-dark; }
+	.border-white     { border-color: $stool-design-border-white; }
+
+	.bg-circle {
+		@include layout-minimum-aspect(1, 1);
+		position: relative;
+		z-index: 0;
+		&::after {
+			content: '';
+			display: block;
+			position: absolute;
+			z-index: -1;
+			top: 0;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 100%;
+			padding-bottom: 100%;
+			border-radius: 50%;
+			background-color: $stool-design-color-line;
+		}
+	}
+	.bg-circle-primary::after   { background-color: $stool-design-bg-primary; }
+	.bg-circle-secondary::after { background-color: $stool-design-bg-secondary; }
+	.bg-circle-light::after     { background-color: $stool-design-bg-light; }
+	.bg-circle-dark::after      { background-color: $stool-design-bg-dark; }
+	.bg-circle-white::after     { background-color: $stool-design-bg-white; }
+
+	.icon-arrow-down {
+		display: inline-block;
+		@include shape-angle($stool-design-color-line, bottom, 3rem, 2px);
+		margin-top: -1.5rem;
+	}
+	.icon-arrow-primary   { @include shape-angle-color($stool-design-color-primary); }
+	.icon-arrow-secondary { @include shape-angle-color($stool-design-color-secondary); }
+	.icon-arrow-light     { @include shape-angle-color($stool-design-color-light); }
+	.icon-arrow-dark      { @include shape-angle-color($stool-design-color-dark); }
+	.icon-arrow-white     { @include shape-angle-color($stool-design-color-white); }
+
+	.icon-add {
+		@include shape-cross($stool-design-color-line, 3rem, 2px);
+	}
+	.icon-add-primary   { @include shape-add-color($stool-design-color-primary); }
+	.icon-add-secondary { @include shape-add-color($stool-design-color-secondary); }
+	.icon-add-light     { @include shape-add-color($stool-design-color-light); }
+	.icon-add-dark      { @include shape-add-color($stool-design-color-dark); }
+	.icon-add-white     { @include shape-add-color($stool-design-color-white); }
+
+}
