@@ -143,13 +143,13 @@ $stool-design-border-radius: 1px;
 	.icon-arrow-dark      { @include shape-angle-color($stool-design-color-dark); }
 	.icon-arrow-white     { @include shape-angle-color($stool-design-color-white); }
 
-	.icon-add {
+	.icon-cross {
 		@include shape-cross($stool-design-color-line, 3rem, 2px);
 	}
-	.icon-add-primary   { @include shape-add-color($stool-design-color-primary); }
-	.icon-add-secondary { @include shape-add-color($stool-design-color-secondary); }
-	.icon-add-light     { @include shape-add-color($stool-design-color-light); }
-	.icon-add-dark      { @include shape-add-color($stool-design-color-dark); }
-	.icon-add-white     { @include shape-add-color($stool-design-color-white); }
+	.icon-add-primary   { @include shape-cross-color($stool-design-color-primary); }
+	.icon-add-secondary { @include shape-cross-color($stool-design-color-secondary); }
+	.icon-add-light     { @include shape-cross-color($stool-design-color-light); }
+	.icon-add-dark      { @include shape-cross-color($stool-design-color-dark); }
+	.icon-add-white     { @include shape-cross-color($stool-design-color-white); }
 
 }
