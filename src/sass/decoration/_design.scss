@@ -3,7 +3,7 @@
  * Design Classes (SCSS)
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2019-05-20
+ * @version 2019-05-21
  *
  */
 
@@ -135,7 +135,7 @@ $stool-design-border-radius: 1px;
 	.icon-arrow-down {
 		display: inline-block;
 		@include shape-angle($stool-design-color-line, bottom, 3rem, 2px);
-		margin-top: -1.5rem;
+		transform: translateY(-0.75rem) rotate(-135deg);
 	}
 	.icon-arrow-primary   { @include shape-angle-color($stool-design-color-primary); }
 	.icon-arrow-secondary { @include shape-angle-color($stool-design-color-secondary); }
