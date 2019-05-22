@@ -10,14 +10,14 @@ gulp.task('js', () => {
 		.pipe($.babel({ presets: [['@babel/env', { targets: { ie: 11 } }]] }))
 		.pipe($.uglify())
 		.pipe($.rename({ extname: '.min.js' }))
-		.pipe(gulp.dest('dist/js'));
+		.pipe(gulp.dest('./dist/js'));
 });
 
 gulp.task('sass', () => {
 	return gulp.src(['src/sass/**/*.scss'], {base: 'src/sass'})
 		.pipe($.plumber())
-		.pipe($.changed('dist/sass'))
-		.pipe(gulp.dest('dist/sass'));
+		.pipe($.changed('./dist/sass'))
+		.pipe(gulp.dest('./dist/sass'));
 });
 
 gulp.task('watch', () => {
@@ -40,7 +40,7 @@ gulp.task('docs-sass', gulp.series('sass', () => {
 		.pipe($.autoprefixer({ browsers: ['ie >= 11'], remove: false }))
 		.pipe($.rename({ extname: '.min.css' }))
 		.pipe($.sourcemaps.write('.'))
-		.pipe(gulp.dest('docs'));
+		.pipe(gulp.dest('./docs'));
 }));
 
 gulp.task('docs-watch', () => {
