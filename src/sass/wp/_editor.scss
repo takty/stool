@@ -3,7 +3,7 @@
  * Editor Style
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2019-04-19
+ * @version 2019-06-20
  *
  * @import 'stile/sass/basic';
  * @import 'stile/sass/content';
@@ -11,10 +11,6 @@
  *
  */
 
-
-@import '../decoration';
-@import '../element';
-@import '../util';
 
 $editor-color          : #bce !default;
 $editor-color-container: #c4c !default;
@@ -30,9 +26,9 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 		body {
 			@include font-family($custom-font);
 
-			margin: base-vr(1) auto base-vr(1) base-vr(1);
+			margin   : base-vr(1) auto base-vr(1) base-vr(1);
 			max-width: $editor-size-text-width;
-			width: calc(100% - #{base-vr(2)});
+			width    : calc(100% - #{base-vr(2)});
 
 			@include stool-editor-child-margin;
 		}
@@ -67,31 +63,25 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 }
 
 @mixin stool-editor-heading {
-
 	h3:not(:first-child) { margin-top: 3rem; }
 	h4:not(:first-child) { margin-top: 1.5rem; }
 	h5:not(:first-child) { margin-top: 1rem; }
 
 	h2, h3, h4, h5, h6, hr { clear: both; }
-
 }
 
 @mixin stool-editor-link {
-
 	a:not([class]) {
-		color: $stile-link-color-text;
+		color          : $stile-link-color-text;
 		text-decoration: underline;
 	}
-
 }
 
 @mixin stool-editor-table {
-
 	td {
 		min-width: 1rem;
-		padding: 0.25rem;
+		padding  : 0.25rem;
 	}
-
 }
 
 @mixin stool-editor-option {
@@ -100,19 +90,22 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 
 	.alignleft,
 	.alignright {
-		min-width: 10rem;  // Same with size-thumbnail and size-small
-		@include fill-stripe(#fff, $editor-color, 1rem, -45deg, 1%);
-		margin-top: base-vr(1);
-		margin-bottom: base-vr(1);
+		min-width : 10rem;  // Same with size-thumbnail and size-small
+		margin    : { top: base-vr(1); bottom: base-vr(1); }
+		background: {
+			size  : 1rem 1rem;
+			color : #fff;
+			repeat: repeat;
+			image : linear-gradient(-45deg,
+				$editor-color 1%, transparent 1%,
+				transparent 50%, $editor-color 50%,
+				$editor-color 51%, transparent 51%, transparent
+			);
+		}
 	}
 
-	.alignleft {
-		margin-right: base-vr(2);
-	}
-
-	.alignright {
-		margin-left: base-vr(2);
-	}
+	.alignleft  { margin-right: base-vr(2); }
+	.alignright { margin-left : base-vr(2); }
 
 
 	// Container ---------------------------------------------------------------
@@ -122,17 +115,17 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 	.column-4 {
 		position: relative;
 		&::before {
-			position: absolute;
-			top: 0;
-			left: 0;
-			color: $editor-color-container;
+			position        : absolute;
+			top             : 0;
+			left            : 0;
 			background-color: #fff;
-			font-size: $editor-size-font;
-			line-height: 1;
+			color           : $editor-color-container;
+			font-size       : $editor-size-font;
+			line-height     : 1;
 		}
 		> * {
 			padding: 1rem 0.5rem;
-			border: dotted 1px $editor-color-container;
+			border : dotted 1px $editor-color-container;
 			@include stool-editor-child-margin;
 		}
 	}
@@ -143,29 +136,12 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 
 	// Image Size --------------------------------------------------------------
 
-	.size-thumbnail {
-		width: 10rem;
-	}
-
-	.size-small {
-		width: 10rem;
-	}
-
-	.size-medium-small {
-		width: 15rem;
-	}
-
-	.size-medium {
-		width: 20rem;
-	}
-
-	.size-medium_large {
-		width: 30rem;
-	}
-
-	.size-large {
-		width: 40rem;
-	}
+	.size-thumbnail    { width: 10rem; }
+	.size-small        { width: 10rem; }
+	.size-medium-small { width: 15rem; }
+	.size-medium       { width: 20rem; }
+	.size-medium_large { width: 30rem; }
+	.size-large        { width: 40rem; }
 
 	.mceTemp > .wp-caption {
 		&.alignleft, &.alignright {
@@ -179,17 +155,17 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 	.tab-page,
 	.pseudo-tab-page {
 		padding: 1rem 0.5rem;
-		border: dotted 1px $editor-color-container;
+		border : dotted 1px $editor-color-container;
 		@include stool-editor-child-margin;
 
 		position: relative;
 		&::before {
-			position: absolute;
-			top: -1px;
-			left: -1px;
-			color: $editor-color-container;
+			position        : absolute;
+			top             : -1px;
+			left            : -1px;
 			background-color: #fff;
-			font-size: $editor-size-font;
+			color           : $editor-color-container;
+			font-size       : $editor-size-font;
 			line-height: 1;
 		}
 	}
@@ -200,23 +176,22 @@ $stile-size-unit: 0.9rem !default;  // Variable in stile
 }
 
 @mixin stool-editor-class {
-
 	div.frame {
 		background-color: $stile-block-color-background;
-		padding: base-vr(2);
-		line-height: base-vr(2);
+		padding         : base-vr(2);
+		line-height     : base-vr(2);
 
 		@include stool-editor-child-margin;
 	}
 
 	div.clear {
 		border: dotted 1px $editor-color-container;
-		clear: both;
+		clear : both;
+
 		&::after {
-			content: 'Clear Float';
-			color: $editor-color-container;
+			content  : 'Clear Float';
+			color    : $editor-color-container;
 			font-size: $editor-size-font;
 		}
 	}
-
 }

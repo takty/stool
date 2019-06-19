@@ -3,7 +3,7 @@
  * Styles of WordPress Block Editor
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2018-11-07
+ * @version 2019-06-20
  *
  */
 
@@ -36,24 +36,20 @@ $stool-block-color-cover-text          : #fff !default;
 	.wp-block-cover .wp-block-cover-text,
 	.wp-block-cover h2 {
 		@include font-size-level($stool-block-level-cover-text);
-		color: $stool-block-color-cover-text;
+		color        : $stool-block-color-cover-text;
 		margin-bottom: 0;
-		max-width: 40rem;
-		padding: 1rem;
-		text-align: center;
-		z-index: 1;
+		max-width    : 40rem;
+		padding      : 1rem;
+		text-align   : center;
+		z-index      : 1;
 	}
 
 }
 
 @mixin stool-block-quote {
-	// blockquote {
-	// 	@include stool-editor-child-margin;
-	// }
 	.wp-block-quote {
-		border: none;
-		padding-left: base-vr(4);
-		padding-right: 0;
+		border       : none;
+		padding      : { left : base-vr(4); right: 0; }
 		margin-bottom: 0;
 	}
 	> * + *.wp-block-quote {
@@ -67,22 +63,20 @@ $stool-block-color-cover-text          : #fff !default;
 @mixin stool-block-pullquote {
 	.wp-block-pullquote {
 		&:not(.is-style-solid-color) {
-			border-top: $stile-block-size-line-width solid $stile-block-color-rule;
+			border-top   : $stile-block-size-line-width solid $stile-block-color-rule;
 			border-bottom: $stile-block-size-line-width solid $stile-block-color-rule;
 		}
 		blockquote {
-			border: none;
-			padding-left: 0;
-			padding-right: 0;
+			border       : none;
+			padding      : { left: 0; right: 0; }
 			margin-bottom: 0;
-			&::before {
-				display: none;
-			}
+
+			&::before { display: none; }
 		}
 		&.is-style-solid-color {
 			background-color: $stool-block-color-pullquote-background;
 			blockquote {
-				width: 60%;
+				width    : 60%;
 				min-width: $stile-alignment-size-min-text-width;
 			}
 		}
