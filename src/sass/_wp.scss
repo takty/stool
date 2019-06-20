@@ -3,25 +3,24 @@
  * WordPress Specific Style
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2018-11-07
+ * @version 2019-06-20
  *
  */
 
-
-@charset 'utf-8';
 
 @import 'wp/accessibility';
 @import 'wp/block';
 @import 'wp/clearings';
 
 
-.page-content .wp-smiley,
-.entry-content .wp-smiley,
-.comment-content .wp-smiley {
-	border: none;
-	margin-bottom: 0;
-	margin-top: 0;
-	padding: 0;
+.page-content,
+.entry-content,
+.comment-content {
+	.wp-smiley {
+		border : none;
+		margin : { bottom: 0; top: 0; }
+		padding: 0;
+	}
 }
 
 .gallery {
@@ -29,10 +28,10 @@
 }
 
 .gallery-item {
-	display: inline-block;
-	text-align: center;
+	display       : inline-block;
+	text-align    : center;
 	vertical-align: top;
-	width: 100%;
+	width         : 100%;
 
 	.gallery-columns-2 & { max-width: 50%; }
 	.gallery-columns-3 & { max-width: 33.33%; }
