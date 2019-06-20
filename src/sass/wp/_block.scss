@@ -8,6 +8,9 @@
  */
 
 
+@warn 'Deprecated. Use Stinc instead.';
+
+
 $stool-block-level-pullquote-text      : $stile-design-level-blockquote-text-large !default;
 $stool-block-color-pullquote-background: rgba($stile-block-color-rule, 0.25) !default;
 $stool-block-level-cover-text          : 5 !default;
