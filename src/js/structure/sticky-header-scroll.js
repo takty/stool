@@ -3,7 +3,7 @@
  * Sticky Header - scroll (JS)
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2018-10-09
+ * @version 2019-07-04
  *
  */
 
@@ -24,12 +24,12 @@ document.addEventListener('DOMContentLoaded', function () {
 	let isFloating = false;
 
 	setEnabled(canEnabled());
-	window.addEventListener('resize', onResize);
+	window.ST.onResize(onResize);
 	onResize();
-	addEventListenerWithOptions(window, 'scroll', wrapFunction(onScroll, 10), {capture: true});
+	addEventListenerWithOptions(window, 'scroll', window.ST.throttle(onScroll), { capture: true });
 	onScroll();
 
-	doBeforePrint(function () {setEnabled(false);});
+	window.ST.onBeforePrint(function () { setEnabled(false); });
 
 	function setEnabled(flag) {
 		if (flag === isEnabled) return;
@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		if (!isEnabled) return;
 
 		const h = elmSticky.clientHeight + 'px';
+		// eslint-disable-next-line no-multi-assign
 		elmPh.style.minHeight = elmPh.style.maxHeight = h;
 		onScroll();
 	}
@@ -77,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 
 	function adjustFloating(offset, height) {
-		elmSticky.style.top = (-height + getWpAdminBarHeight()) + 'px';
+		elmSticky.style.top = (-height + window.ST.getWpAdminBarHeight()) + 'px';
 		elmSticky.style.transform = 'translateY(' + (height - offset) + 'px)';
 	}
 
@@ -93,14 +94,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	// Common ------------------------------------------------------------------
 
+
 	function canEnabled() {
 		const FIXED_MIN_WINDOW_WIDTH = 600;  // for-tablet-up
 		const WINDOW_HEIGHT_RATE = 0.3;
 
-		const fmww = (typeof STOOL_FIXED_MIN_WINDOW_WIDTH !== 'undefined') ? STOOL_FIXED_MIN_WINDOW_WIDTH : FIXED_MIN_WINDOW_WIDTH;
+		const fmww = (window.STOOL_FIXED_MIN_WINDOW_WIDTH !== undefined) ? window.STOOL_FIXED_MIN_WINDOW_WIDTH : FIXED_MIN_WINDOW_WIDTH;
 		if (window.innerWidth < fmww) return false;
 
-		if (ST.BROWSER === 'safari') {
+		if (window.ST.BROWSER === 'safari') {
 			const ua = window.navigator.userAgent.toLowerCase();
 			const ts = ua.split(' ');
 			for (let i = 0; i < ts.length; i += 1) {
@@ -120,40 +122,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	// Utilities ---------------------------------------------------------------
 
-	function wrapFunction(fn, delay) {
-		let st;
-		return function() {
-			if (st) clearTimeout(st);
-			st = setTimeout(function () {
-				fn();
-				st = null;
-			}, delay);
-		};
-	}
-
-	function getWpAdminBarHeight() {
-		const wpab = document.getElementById('wpadminbar');
-		return wpab ? wpab.clientHeight : 0;
-	}
-
-	function doBeforePrint(func, forceMediaCheck = true) {
-		window.addEventListener('beforeprint', func, false);
-		if (forceMediaCheck || !('onbeforeprint' in window)) {
-			let printMedia;
-			if (window.matchMedia && (printMedia = matchMedia('print')) && printMedia.addListener) {
-				printMedia.addListener(function () {if (printMedia.matches) func();});
-			}
-		}
-	}
-
 
 	let supportsPassive = false;
 	try {
 		const opts = Object.defineProperty({}, 'passive', {
-			get: function() { supportsPassive = true; }
+			get: function () { return supportsPassive = true; }
 		});
 		window.addEventListener('test', null, opts);
-	} catch (e) {}
+	} catch (e) {
+		// do nothing
+	}
 
 	function addEventListenerWithOptions(target, type, handler, options) {
 		let optionsOrCapture = options;

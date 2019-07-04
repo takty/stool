@@ -3,7 +3,7 @@
  * Side Header (JS)
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2018-08-16
+ * @version 2019-07-04
  *
  */
 
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	const CLS_ENTRY_HEAD = 'st-side-header-entry-header';
 	const CLS_ENTRY_CONT = 'st-side-header-entry-content';
 
-	const getSiteHeaderOffset = ST.makeOffsetFunction(CLS_STICKY_ELM, CLS_STICKY_ELM_TOP);
+	const getSiteHeaderOffset = window.ST.makeOffsetFunction(CLS_STICKY_ELM, CLS_STICKY_ELM_TOP);
 	const tars = collectElements();
 
 	let wpabH = 0;
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 	let rafId = 0;
 
-	doBeforePrint(function () {
+	window.ST.onBeforePrint(function () {
 		isEnabled = false;
 		isPrinting = true;
 		for (let i = 0; i < tars.length; i += 1) turnOffFixed(tars[i]);
@@ -47,6 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 	// -------------------------------------------------------------------------
+
 
 	function collectElements() {
 		const ret = [];
@@ -62,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			const d = document.createElement('div');
 			d.classList.add('st-side-header-entry-header-spacer');
 
-			ret.push({entry: e, header: eh, content: ec, dummy_header: d, cur_state: false});
+			ret.push({ entry: e, header: eh, content: ec, dummy_header: d, cur_state: false });
 		}
 		return ret;
 	}
@@ -85,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			}
 			setTimeout(function () {
 				for (let i = 0; i < tars.length; i += 1) updateFixed(tars[i]);
-				wpabH = ST.getWpAdminBarHeight();
+				wpabH = window.ST.getWpAdminBarHeight();
 				shH   = getSiteHeaderOffset();
 				scrollAF();
 			}, 0);
@@ -161,17 +162,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	// Utilities ---------------------------------------------------------------
 
-	function doBeforePrint(func, forceMediaCheck = true) {
-		window.addEventListener('beforeprint', func, false);
-		if (forceMediaCheck || !('onbeforeprint' in window)) {
-			if (window.matchMedia) {
-				let mediaQueryList = window.matchMedia('print');
-				mediaQueryList.addListener(function (mql) {
-					if (mql.matches) func();
-				});
-			}
-		}
-	}
 
 	function doAfterPrint(func, forceMediaCheck = true) {
 		window.addEventListener('afterprint', func, false);
