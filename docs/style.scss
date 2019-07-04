@@ -3,20 +3,26 @@
  * Stile Sample (SCSS)
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2018-05-29
+ * @version 2019-07-04
  *
  */
 
 @charset 'utf-8';
 
-@import 'lib/stile/sass/basic';
-@import 'lib/stile/sass/content';
-@import 'lib/stile/sass/option';
+@import '../node_modules/stile/dist/sass/basic';
+@import '../node_modules/stile/dist/sass/content';
+@import '../node_modules/stile/dist/sass/option';
 @import '../dist/sass/structure/side-header';
 
 
+:root {
+	font-size: 14px;
+	@include font-responsive-size-interval(600px, 900px, 14px, 16px);
+	@include font-responsive-size-interval(900px, 1800px, 16px, 20px);
+	@include for-big-desktop-up { font-size: 20px; }
+}
+
 body {
-	@include font-responsive-size(600px, 2560px, 16px, 20px);
 	@include font-family;
 	@include font-smoothing;
 	@include font-visible-chrome;
@@ -27,13 +33,16 @@ body {
 }
 
 .stile {
-	@include stile-content(false);
-	@include stile-option;
-
+	@include stile-content;
+	@include stile-option(true);
 	color: hsla(0, 0, 0, 0.75);
+
+	> div:not([class]) { @include stile-margin; }
 }
 
+
 // -----------------------------------------------------------------------------
+
 
 .entry-inner {
 	@include layout-side-margin(64rem, 2rem);
