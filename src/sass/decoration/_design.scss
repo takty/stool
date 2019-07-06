@@ -3,7 +3,7 @@
  * Design Classes (SCSS)
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2019-05-21
+ * @version 2019-07-06
  *
  */
 
@@ -109,7 +109,7 @@ $stool-design-border-radius: 1px;
 	.border-white     { border-color: $stool-design-border-white; }
 
 	.bg-circle {
-		@include layout-minimum-aspect(1, 1);
+		@include layout-aspect(1, 1, true);
 		position: relative;
 		z-index: 0;
 		&::after {
