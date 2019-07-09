@@ -44,7 +44,7 @@ gulp.task('docs-sass', gulp.series('sass', () => gulp.src('docs/style.scss')
 	.pipe($.autoprefixer({ remove: false }))
 	.pipe($.rename({ extname: '.min.css' }))
 	.pipe($.sourcemaps.write('.'))
-	.pipe(gulp.dest('./docs')))
+	.pipe(gulp.dest('./docs/css')))
 );
 
 gulp.task('docs-js', gulp.series('js', () => gulp.src([
