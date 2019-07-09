@@ -3,7 +3,7 @@
  * Sticky Header - scroll (JS)
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2019-07-04
+ * @version 2019-07-09
  *
  */
 
@@ -19,17 +19,17 @@ document.addEventListener('DOMContentLoaded', function () {
 	const elmStickyView = document.getElementsByClassName(CLS_STICKY_ELM_TOP)[0];
 	if (!elmSticky || !elmStickyView) return;
 
-	const elmPh      = document.createElement('div');
+	window.ST.onBeforePrint(function () { setEnabled(false); });
+
+	const elmPh    = document.createElement('div');
 	let isEnabled  = false;
 	let isFloating = false;
 
 	setEnabled(canEnabled());
 	window.ST.onResize(onResize);
 	onResize();
-	addEventListenerWithOptions(window, 'scroll', window.ST.throttle(onScroll), { capture: true });
+	window.ST.onScroll(onScroll);
 	onScroll();
-
-	window.ST.onBeforePrint(function () { setEnabled(false); });
 
 	function setEnabled(flag) {
 		if (flag === isEnabled) return;
@@ -123,22 +123,22 @@ document.addEventListener('DOMContentLoaded', function () {
 	// Utilities ---------------------------------------------------------------
 
 
-	let supportsPassive = false;
-	try {
-		const opts = Object.defineProperty({}, 'passive', {
-			get: function () { return supportsPassive = true; }
-		});
-		window.addEventListener('test', null, opts);
-	} catch (e) {
-		// do nothing
-	}
+	// let supportsPassive = false;
+	// try {
+	// 	const opts = Object.defineProperty({}, 'passive', {
+	// 		get: function () { return supportsPassive = true; }
+	// 	});
+	// 	window.addEventListener('test', null, opts);
+	// } catch (e) {
+	// 	// do nothing
+	// }
 
-	function addEventListenerWithOptions(target, type, handler, options) {
-		let optionsOrCapture = options;
-		if (!supportsPassive) {
-			optionsOrCapture = options.capture;
-		}
-		target.addEventListener(type, handler, optionsOrCapture);
-	}
+	// function addEventListenerWithOptions(target, type, handler, options) {
+	// 	let optionsOrCapture = options;
+	// 	if (!supportsPassive) {
+	// 		optionsOrCapture = options.capture;
+	// 	}
+	// 	target.addEventListener(type, handler, optionsOrCapture);
+	// }
 
 });

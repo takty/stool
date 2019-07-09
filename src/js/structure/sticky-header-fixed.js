@@ -3,7 +3,7 @@
  * Sticky Header - fixed (JS)
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2019-07-04
+ * @version 2019-07-09
  *
  */
 
@@ -14,31 +14,32 @@ document.addEventListener('DOMContentLoaded', function () {
 	const CLS_STICKY_ELM_TOP = 'st-sticky-header-top';
 	const CLS_STATE_STICKY   = 'sticky';
 	const CLS_STATE_FLOATING = 'floating';
+	const CLS_STATE_OFFSET   = 'offset';
 
 	const elmSticky     = document.getElementsByClassName(CLS_STICKY_ELM)[0];
 	const elmStickyView = document.getElementsByClassName(CLS_STICKY_ELM_TOP)[0];
 	if (!elmSticky || !elmStickyView) return;
 
-	const elmPh      = document.createElement('div');
+	window.ST.onBeforePrint(() => { setEnabled(false); });
+
+	const elmPh    = document.createElement('div');
 	let isEnabled  = false;
 	let isFloating = false;
 
 	setEnabled(canEnabled());
 	window.ST.onResize(onResize);
 	onResize();
-	addEventListenerWithOptions(window, 'scroll', window.ST.throttle(onScroll), { capture: true });
+	window.ST.onScroll(onScroll);
 	onScroll();
-
-	window.ST.onBeforePrint(function () { setEnabled(false); });
 
 	function setEnabled(flag) {
 		if (flag === isEnabled) return;
 		if (flag) {
 			elmSticky.classList.add(CLS_STATE_STICKY);
 			elmSticky.parentNode.insertBefore(elmPh, elmSticky);
-			if (document.body.classList.contains('ie11')) {
-				elmSticky.style.top = window.ST.getWpAdminBarHeight() + 'px';
-			}
+
+			const bcr = elmPh.getBoundingClientRect();
+			elmSticky.style.top = (bcr.top + window.pageYOffset) + 'px';
 		} else {
 			elmSticky.classList.remove(CLS_STATE_STICKY);
 			elmSticky.classList.remove(CLS_STATE_FLOATING);
@@ -74,8 +75,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		if (offset < window.pageYOffset) {
 			elmSticky.style.transform = 'translateY(-' + offset + 'px)';
+			elmSticky.classList.add(CLS_STATE_OFFSET);
 		} else {
 			elmSticky.style.transform = '';
+			elmSticky.classList.remove(CLS_STATE_OFFSET);
 		}
 	}
 
@@ -111,22 +114,22 @@ document.addEventListener('DOMContentLoaded', function () {
 	// Utilities ---------------------------------------------------------------
 
 
-	let supportsPassive = false;
-	try {
-		const opts = Object.defineProperty({}, 'passive', {
-			get: function () { return supportsPassive = true; }
-		});
-		window.addEventListener('test', null, opts);
-	} catch (e) {
-		// do nothing
-	}
+	// let supportsPassive = false;
+	// try {
+	// 	const opts = Object.defineProperty({}, 'passive', {
+	// 		get: function () { return supportsPassive = true; }
+	// 	});
+	// 	window.addEventListener('test', null, opts);
+	// } catch (e) {
+	// 	// do nothing
+	// }
 
-	function addEventListenerWithOptions(target, type, handler, options) {
-		let optionsOrCapture = options;
-		if (!supportsPassive) {
-			optionsOrCapture = options.capture;
-		}
-		target.addEventListener(type, handler, optionsOrCapture);
-	}
+	// function addEventListenerWithOptions(target, type, handler, options) {
+	// 	let optionsOrCapture = options;
+	// 	if (!supportsPassive) {
+	// 		optionsOrCapture = options.capture;
+	// 	}
+	// 	target.addEventListener(type, handler, optionsOrCapture);
+	// }
 
 });
