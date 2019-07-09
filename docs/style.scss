@@ -70,10 +70,11 @@ body {
 
 	.st-sticky-header-top {
 		border: blue 1px dashed;
-		padding-bottom: base-vr(6);
+		padding-bottom: base-vr(4);
 	}
 
 	transition: box-shadow 0.5s;
+	position: relative;  // Must need!
 }
 
 .st-sticky-header.sticky {
@@ -83,7 +84,10 @@ body {
 	right   : 0;
 	z-index : 9999;
 
-	transition: transform 0.2s, box-shadow 0.5s;
-	&.offset { transition: transform 0.5s; }
 	&.floating { box-shadow: 0 0.25rem 0.25rem 0 rgba(#000, 0.25); }
+}
+
+.st-sticky-header.fixed.sticky {
+	transition: transform 0.25s, box-shadow 0.5s;
+	&.offset { transition: transform 0.5s; }
 }
