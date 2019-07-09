@@ -54,9 +54,9 @@ document.addEventListener('DOMContentLoaded', function () {
 		setEnabled(canEnabled());
 		if (!isEnabled) return;
 
-		const h = elmSticky.clientHeight + 'px';
-		// eslint-disable-next-line no-multi-assign
-		elmPh.style.minHeight = elmPh.style.maxHeight = h;
+		const h = elmSticky.offsetHeight + 'px';
+		elmPh.style.minHeight = h;
+		elmPh.style.maxHeight = h;
 		onScroll();
 	}
 
@@ -71,7 +71,8 @@ document.addEventListener('DOMContentLoaded', function () {
 			isFloating = true;
 		}
 		let offset = elmStickyView.offsetTop;
-		if (elmStickyView === elmSticky) offset -= elmSticky.offsetTop;
+		if (elmStickyView === elmSticky) offset = 0;
+		offset += window.pageYOffset + elmPh.getBoundingClientRect().top - window.ST.getWpAdminBarHeight();
 
 		if (offset < window.pageYOffset) {
 			elmSticky.style.transform = 'translateY(-' + offset + 'px)';
