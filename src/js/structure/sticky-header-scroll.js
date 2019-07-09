@@ -45,17 +45,14 @@ document.addEventListener('DOMContentLoaded', function () {
 		if (!isEnabled) return;
 
 		const h = elmSticky.clientHeight + 'px';
-		// eslint-disable-next-line no-multi-assign
-		elmPh.style.minHeight = elmPh.style.maxHeight = h;
+		elmPh.style.minHeight = h;
+		elmPh.style.maxHeight = h;
 		onScroll();
 	}
 
 	function onScroll() {
 		if (!isEnabled) return;
-
 		let height = elmSticky.clientHeight;
-		let offset = elmStickyView.offsetTop;
-		if (elmStickyView === elmSticky) offset -= elmSticky.offsetTop;
 
 		if (height < window.pageYOffset) {
 			if (!isFloating) turnOnFloating();
@@ -65,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			let offset = elmStickyView.offsetTop;
 			if (elmStickyView === elmSticky) offset -= elmSticky.offsetTop;
 			adjustFloating(offset, height);
-		} else if (window.pageYOffset <= offset) {
+		} else {
 			if (isFloating) turnOffFloating();
 		}
 	}
