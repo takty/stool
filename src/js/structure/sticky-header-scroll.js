@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		setEnabled(canEnabled());
 		if (!isEnabled) return;
 
-		const h = elmSticky.clientHeight + 'px';
+		const h = elmSticky.offsetHeight + 'px';
 		elmPh.style.minHeight = h;
 		elmPh.style.maxHeight = h;
 		onScroll();
@@ -52,15 +52,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	function onScroll() {
 		if (!isEnabled) return;
-		let height = elmSticky.clientHeight;
+		const top = isFloating ? elmPh.getBoundingClientRect().top : elmSticky.getBoundingClientRect().top;
+		const offset = elmStickyView.offsetTop;
 
-		if (height < window.pageYOffset) {
+		if (top + offset < window.ST.getWpAdminBarHeight()) {
 			if (!isFloating) turnOnFloating();
 
 			// Recalc here!
-			let height = elmSticky.clientHeight;
-			let offset = elmStickyView.offsetTop;
-			if (elmStickyView === elmSticky) offset -= elmSticky.offsetTop;
+			const height = elmSticky.offsetHeight;
+			const offset = (elmStickyView === elmSticky) ? 0 : elmStickyView.offsetTop;
 			adjustFloating(offset, height);
 		} else {
 			if (isFloating) turnOffFloating();
@@ -115,27 +115,5 @@ document.addEventListener('DOMContentLoaded', function () {
 		const h = elmStickyView.clientHeight;
 		return (h < window.innerHeight * WINDOW_HEIGHT_RATE);
 	}
-
-
-	// Utilities ---------------------------------------------------------------
-
-
-	// let supportsPassive = false;
-	// try {
-	// 	const opts = Object.defineProperty({}, 'passive', {
-	// 		get: function () { return supportsPassive = true; }
-	// 	});
-	// 	window.addEventListener('test', null, opts);
-	// } catch (e) {
-	// 	// do nothing
-	// }
-
-	// function addEventListenerWithOptions(target, type, handler, options) {
-	// 	let optionsOrCapture = options;
-	// 	if (!supportsPassive) {
-	// 		optionsOrCapture = options.capture;
-	// 	}
-	// 	target.addEventListener(type, handler, optionsOrCapture);
-	// }
 
 });

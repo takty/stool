@@ -111,26 +111,4 @@ document.addEventListener('DOMContentLoaded', function () {
 		return (h < window.innerHeight * WINDOW_HEIGHT_RATE);
 	}
 
-
-	// Utilities ---------------------------------------------------------------
-
-
-	// let supportsPassive = false;
-	// try {
-	// 	const opts = Object.defineProperty({}, 'passive', {
-	// 		get: function () { return supportsPassive = true; }
-	// 	});
-	// 	window.addEventListener('test', null, opts);
-	// } catch (e) {
-	// 	// do nothing
-	// }
-
-	// function addEventListenerWithOptions(target, type, handler, options) {
-	// 	let optionsOrCapture = options;
-	// 	if (!supportsPassive) {
-	// 		optionsOrCapture = options.capture;
-	// 	}
-	// 	target.addEventListener(type, handler, optionsOrCapture);
-	// }
-
 });
