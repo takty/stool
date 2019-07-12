@@ -3,7 +3,7 @@
  * Sticky Header - scroll (JS)
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2019-07-09
+ * @version 2019-07-12
  *
  */
 
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	function canEnabled() {
 		const FIXED_MIN_WINDOW_WIDTH = 600;  // for-tablet-up
-		const WINDOW_HEIGHT_RATE = 0.3;
+		const WINDOW_HEIGHT_RATE = 0.2;
 
 		const fmww = (window.STOOL_FIXED_MIN_WINDOW_WIDTH !== undefined) ? window.STOOL_FIXED_MIN_WINDOW_WIDTH : FIXED_MIN_WINDOW_WIDTH;
 		if (window.innerWidth < fmww) return false;
