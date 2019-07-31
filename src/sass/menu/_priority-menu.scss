@@ -1,0 +1,116 @@
+/**
+ *
+ * Priority Menu (SCSS)
+ *
+ * @author Takuto Yanagida @ Space-Time Inc.
+ * @version 2019-07-31
+ *
+ * @import 'lib/stile/sass/basic/query';
+ *
+ */
+
+
+$color-base-light: #aaa;
+$size-border-radius: 1.5px;
+$color-inv-text: #fff;
+$color-bg: #fff;
+
+
+.priority-menu {
+	.menu li a:not([class]), .priority-menu-popup li a:not([class]) {
+		@include layout-centering(true);
+		white-space: nowrap;
+		line-height: 1;
+		width: 100%;
+		height: 100%;
+
+		margin: 0;
+		padding: 0.85rem 1rem;
+		user-select: none;
+		@include font-size-level(0, false);
+
+		&[data-stile ~= 'link-external']::after {
+			@include stile-link-img($stile-link-img-external);
+			transform: translateY(-0.01rem);
+		}
+		&:hover {
+			text-decoration: underline;
+		}
+		background-color: transparent;
+	}
+
+}
+.site-header-nav {
+	display: flex;
+	align-items: center;
+	border: 1px solid gray;
+
+}
+		.site-header-menu {
+			margin-bottom: -1rem;
+
+			.menu {
+				display: flex;
+				justify-content: flex-end;
+				flex-wrap: wrap;
+				flex-grow: 1;
+			}
+		}
+
+.site-header-menu.priority-menu {
+	flex-grow: 1;
+	display: flex;
+	position: relative;
+	overflow-x: hidden;
+	overflow-y: visible;
+
+	opacity: 0;
+	transition: opacity 0.1s;
+
+	.menu {
+		flex-wrap: nowrap;
+		overflow-x: hidden;
+		justify-content: flex-start;
+	}
+}
+
+.priority-menu-popup {
+	display: none;
+
+	&.visible {
+	margin: 0;
+		display: block;
+		position: absolute;
+		top: calc(100% + 0.25rem);
+		right: 0;
+		z-index: 3;
+		background-color: #f9f9f9;
+		box-shadow: 0 3px 6px rgba(#000, 0.1);
+
+		li a {
+			display: block;
+			padding: 1.15rem 1.5rem;
+			&:hover { background-color: $color-bg; }
+
+			&[data-stile ~= 'link-external']::after {
+				@include stile-link-img($stile-link-img-external);
+				transform: translateY(-0.01rem);
+			}
+		}
+	}
+}
+
+.priority-menu .priority-menu-button {
+	position: relative;
+	margin: 0;
+
+	display        : inline-flex;
+	justify-content: center;
+	align-items    : center;
+
+	&::after {
+		content: '...';
+		display: block;
+	}
+}
+
