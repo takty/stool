@@ -48,7 +48,8 @@ document.addEventListener('DOMContentLoaded', () => {
 			m.parentElement.style.overflowX = 'visible';
 			m.style.justifyContent = 'flex-end';
 		}, 10);
-		window.addEventListener('resize', function () {
+		// window.addEventListener('resize', function () {
+		window.ST.onResize(() => {
 			setTimeout(() => { onResize(m, hm, mis, miws, btn, popup); }, 10);
 		});
 		setTimeout(() => { pm.style.opacity = 1; }, 100);
