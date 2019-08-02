@@ -3,76 +3,80 @@
  * Priority Menu (JS)
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2019-07-31
+ * @version 2019-08-02
  *
  */
 
 
 document.addEventListener('DOMContentLoaded', () => {
 
-	const pms = document.getElementsByClassName('priority-menu');
+	const CLS_TARGET      = 'stool-priority-menu';
+	const CLS_BUTTON      = 'stool-priority-menu-button';
+	const CLS_POPUP       = 'stool-priority-menu-popup';
+	const CLS_STATE_READY = 'ready';
+	const CLS_STATE_OPEN  = 'open';
 
-	for (let i = 0; i < pms.length; i += 1) {
-		init(pms[i]);
-	}
+	const pms = document.getElementsByClassName(CLS_TARGET);
+	for (let i = 0; i < pms.length; i += 1) initialize(pms[i]);
 
-	function init(pm) {
-		const btn = document.createElement('span');
-		btn.classList.add('priority-menu-button');
-		btn.addEventListener('click', () => { popup.classList.toggle('visible'); });
-		btn.style.display = 'none';
 
+	// -------------------------------------------------------------------------
+
+
+	function initialize(pm) {
 		const popup = document.createElement('ul');
-		popup.classList.add('priority-menu-popup');
+		popup.classList.add(CLS_POPUP);
+
+		const btn = document.createElement('span');
+		btn.classList.add(CLS_BUTTON);
+		btn.addEventListener('click', () => {
+			btn.classList.toggle(CLS_STATE_OPEN);
+			popup.classList.toggle(CLS_STATE_OPEN);
+		});
+		btn.style.display = 'none';
 
 		pm.appendChild(btn);
 		pm.appendChild(popup);
 
-		const m = pm.getElementsByTagName('ul')[0];
-		let hm = 0;
+		const menu = pm.getElementsByTagName('ul')[0];
+		const mis = [].slice.call(menu.getElementsByTagName('li'));
 
-		const mis = Array.prototype.slice.call(m.getElementsByTagName('li'));
-		if (0 < mis.length) { hm = mis[0].clientHeight; }
-		for (let i = 0; i < mis.length; i += 1) mis[i].style.visibility = 'hidden';
+		let btnSize = 0;
+		if (0 < mis.length) { btnSize = mis[0].clientHeight; }
+		btn.style.minWidth  = btnSize + 'px';
 
-		const miws = [];
-		for (let i = 0; i < mis.length; i += 1) {
-			miws.push(mis[i].clientWidth);
-		}
-		for (let i = 0; i < mis.length; i += 1) mis[i].style.visibility = '';
-		btn.style.minWidth = hm + 'px';
-		btn.style.minHeight = hm + 'px';
-
+		let ws;
 		setTimeout(() => {
-			onResize(m, hm, mis, miws, btn, popup);
-			m.parentElement.style.overflowX = 'visible';
-			m.style.justifyContent = 'flex-end';
+			ws = mis.map((e) => e.offsetWidth);
+			onResize(menu, btnSize, mis, ws, btn, popup);
 		}, 10);
-		// window.addEventListener('resize', function () {
-		window.ST.onResize(() => {
-			setTimeout(() => { onResize(m, hm, mis, miws, btn, popup); }, 10);
-		});
-		setTimeout(() => { pm.style.opacity = 1; }, 100);
+		window.ST.onResize(() => { onResize(menu, btnSize, mis, ws, btn, popup); });
+		setTimeout(() => { pm.classList.add(CLS_STATE_READY); }, 100);
 	}
 
-	function onResize(menu, hm, items, ws, btn, popup) {
-		let remain = menu.getBoundingClientRect().width - (hm + 8);
-		let sep = items.length;
+	function onResize(menu, btnSize, mis, ws, btn, popup) {
+		let remain = menu.parentElement.getBoundingClientRect().width;
+		let sep = mis.length;
 
-		for (let i = 0; i < ws.length; i += 1) {
-			if ((remain -= ws[i]) < 0) {
-				sep = i;
-				break;
+		let sum = 0;
+		for (let i = 0; i < ws.length; i += 1) sum += ws[i];
+
+		if (remain < sum) {
+			remain -= (btnSize + 8);
+			for (let i = 0; i < ws.length; i += 1) {
+				if ((remain -= ws[i]) < 0) {
+					sep = i;
+					break;
+				}
 			}
 		}
 		for (let i = 0; i < sep; i += 1) {
-			const p = items[i].parentElement;
-			if (p !== menu) menu.appendChild(items[i]);
+			const p = mis[i].parentElement;
+			if (p === menu) ws[i] = mis[i].offsetWidth;
+			else menu.appendChild(mis[i]);
 		}
-		for (let i = sep; i < items.length; i += 1) {
-			popup.appendChild(items[i]);
-		}
-		btn.style.display = (sep === items.length) ? 'none' : '';
+		for (let i = sep; i < mis.length; i += 1) popup.appendChild(mis[i]);
+		btn.style.display = (sep === mis.length) ? 'none' : '';
 	}
 
 });
