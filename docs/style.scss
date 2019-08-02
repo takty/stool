@@ -3,7 +3,7 @@
  * Stile Sample (SCSS)
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2019-07-09
+ * @version 2019-08-02
  *
  */
 
@@ -12,6 +12,7 @@
 
 @import '../node_modules/stile/dist/sass/all';
 @import '../dist/sass/structure/side-header';
+@import '../dist/sass/menu/priority-menu';
 
 
 :root {
@@ -90,4 +91,18 @@ body {
 .st-sticky-header.fixed.sticky {
 	transition: transform 0.25s, box-shadow 0.5s;
 	&.offset { transition: transform 0.5s; }
+}
+
+
+// -----------------------------------------------------------------------------
+
+
+.menu-sample {
+	margin-top: 2rem;
+	& + * { margin-top: 2rem; }
+
+	border-top: 1px solid gray;
+	border-bottom: 1px solid gray;
+
+	padding: { left: 1rem; right: 1rem; }
 }
