@@ -3,7 +3,7 @@
  * Priority Menu (SCSS)
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2019-08-02
+ * @version 2019-08-03
  *
  * @import 'lib/stile/sass/basic/query';
  * @import 'lib/stile/sass/basic/layout';
@@ -49,23 +49,25 @@ $stool-priority-menu-popup-offset      : 0.25rem;
 	}
 
 	// Menu Item
-	li a:not([class]) {
-		@include layout-centering(true);
-		margin: 0;
-		width : 100%;
-		height: 100%;
+	li {
+		label, a:not([class]) {
+			@include layout-centering(true);
+			margin: 0;
+			width : 100%;
+			height: 100%;
 
-		user-select: none;
-		padding    : $stool-priority-menu-padding-item;
+			user-select: none;
+			padding    : $stool-priority-menu-padding-item;
 
-		line-height: 1;
-		white-space: nowrap;
-		@include font-size-level($stool-priority-menu-font-size-level, false);
+			line-height: 1;
+			white-space: nowrap;
+			@include font-size-level($stool-priority-menu-font-size-level, false);
 
-		background-color: $stool-priority-menu-color-bg;
-		&:hover {
-			text-decoration: underline;
-			background-color: $stool-priority-menu-color-bg-hover;
+			background-color: $stool-priority-menu-color-bg;
+			&:hover {
+				text-decoration: underline;
+				background-color: $stool-priority-menu-color-bg-hover;
+			}
 		}
 	}
 
@@ -100,9 +102,11 @@ $stool-priority-menu-popup-offset      : 0.25rem;
 			border-radius   : $stool-priority-menu-size-border-radius;
 			box-shadow      : $stool-priority-menu-popup-box-shadow;
 
-			li a {
-				display: block;
-				padding: $stool-priority-menu-popup-padding-item;
+			li {
+				label, a {
+					display: block;
+					padding: $stool-priority-menu-popup-padding-item;
+				}
 			}
 		}
 	}
