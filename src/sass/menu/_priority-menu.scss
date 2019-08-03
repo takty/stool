@@ -12,16 +12,16 @@
  */
 
 
-$stool-priority-menu-color-bg          : #eee;
-$stool-priority-menu-color-bg-hover    : #fff;
-$stool-priority-menu-font-size-level   : 0;
-$stool-priority-menu-size-border-radius: 1.5px;
-$stool-priority-menu-padding-item      : 0.85rem 1rem;
+$stool-priority-menu-color-bg          : #eee                          !default;
+$stool-priority-menu-color-bg-hover    : #fff                          !default;
+$stool-priority-menu-font-size-level   : 0                               !default;
+$stool-priority-menu-size-border-radius: 1.5px                           !default;
+$stool-priority-menu-padding-item      : 0.85rem 1rem                    !default;
 
-$stool-priority-menu-popup-padding-item: 1.15rem 1.5rem;
-$stool-priority-menu-popup-box-shadow  : 0 0.5rem 1rem rgba(#000, 0.2);
-$stool-priority-menu-popup-z-index     : 3;
-$stool-priority-menu-popup-offset      : 0.25rem;
+$stool-priority-menu-popup-padding-item: 1.15rem 1.5rem                  !default;
+$stool-priority-menu-popup-box-shadow  : 0 0.5rem 1rem rgba(#000, 0.2) !default;
+$stool-priority-menu-popup-z-index     : 3                               !default;
+$stool-priority-menu-popup-offset      : 0.25rem                         !default;
 
 
 .stool-priority-menu {
