@@ -3,7 +3,7 @@
  * Priority Menu (JS)
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2019-08-02
+ * @version 2019-08-26
  *
  */
 
@@ -41,6 +41,14 @@ document.addEventListener('DOMContentLoaded', () => {
 		const menu = pm.getElementsByTagName('ul')[0];
 		const mis = [].slice.call(menu.getElementsByTagName('li'));
 
+		for (let i = 0; i < mis.length; i += 1) {
+			const as = mis[i].getElementsByTagName('a');
+			if (as.length === 0) continue;
+			as[0].addEventListener('click', () => {
+				btn.classList.remove(CLS_STATE_OPEN);
+				popup.classList.remove(CLS_STATE_OPEN);
+			});
+		}
 		let btnSize = 0;
 		if (0 < mis.length) { btnSize = mis[0].clientHeight; }
 		btn.style.minWidth  = btnSize + 'px';
