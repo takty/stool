@@ -3,21 +3,18 @@
  * Shape Styles
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2019-05-20
+ * @version 2019-10-04
  *
  */
 
 
-@charset 'utf-8';
-
-
-@mixin shape-triangle($color, $dir, $size) {
-	width: 0;
+@mixin stool-shape-triangle($color, $dir, $size) {
+	width : 0;
 	height: 0;
 	border: $size solid transparent;
 
 	$d: left;
-	@if     $dir == top    { $d: bottom; }
+	@if      $dir == top    { $d: bottom; }
 	@else if $dir == left   { $d: right;  }
 	@else if $dir == right  { $d: left;   }
 	@else if $dir == bottom { $d: top;    }
@@ -25,9 +22,9 @@
 	border-#{$d}: $size solid $color;
 }
 
-@mixin shape-triangle-color($color, $dir) {
+@mixin stool-shape-triangle-color($color, $dir) {
 	$d: left;
-	@if     $dir == top    { $d: bottom; }
+	@if      $dir == top    { $d: bottom; }
 	@else if $dir == left   { $d: right;  }
 	@else if $dir == right  { $d: left;   }
 	@else if $dir == bottom { $d: top;    }
@@ -35,7 +32,7 @@
 	border-#{$d}-color: $color;
 }
 
-@mixin shape-box-triangle($color, $dir) {
+@mixin stool-shape-box-triangle($color, $dir) {
 	@if $dir == top {
 		background:
 		linear-gradient(to bottom right, transparent 50%, $color 50.1%) no-repeat top left/50% 100%,
@@ -71,23 +68,23 @@
 // -----------------------------------------------------------------------------
 
 
-@mixin shape-angle($color, $dir, $size, $width) {
+@mixin stool-shape-angle($color, $dir, $size, $width) {
 	$r2: 1 / 1.4142125;
-	width: $size * $r2;
+	width : $size * $r2;
 	height: $size * $r2;
 
-	border-top: $width solid $color;
+	border-top : $width solid $color;
 	border-left: $width solid $color;
 
 	transform-origin: #{$size * $r2 / 2} #{$size * $r2/ 2};
-	@if      $dir == top    { transform: rotate(45deg);   }
-	@else if $dir == left   { transform: rotate(-45deg);  }
-	@else if $dir == right  { transform: rotate(135deg);  }
+	@if      $dir == top    { transform: rotate(  45deg); }
+	@else if $dir == left   { transform: rotate( -45deg); }
+	@else if $dir == right  { transform: rotate( 135deg); }
 	@else if $dir == bottom { transform: rotate(-135deg); }
 }
 
-@mixin shape-angle-color($color) {
-	border-top-color: $color;
+@mixin stool-shape-angle-color($color) {
+	border-top-color : $color;
 	border-left-color: $color;
 }
 
@@ -95,28 +92,13 @@
 // -----------------------------------------------------------------------------
 
 
-@mixin shape-rectangle($color, $width, $height) {
-	width: $width;
-	height: $height;
+@mixin stool-shape-rectangle($color, $width, $height) {
+	width           : $width;
+	height          : $height;
 	background-color: $color;
 }
 
-@mixin shape-rectangle-color($color) {
-	background-color: $color;
-}
-
-
-// -----------------------------------------------------------------------------
-
-
-@mixin shape-circle($color, $size) {
-	width: $size;
-	height: $size;
-	background-color: $color;
-	border-radius: 50%;
-}
-
-@mixin shape-circle-color($color) {
+@mixin stool-shape-rectangle-color($color) {
 	background-color: $color;
 }
 
@@ -124,10 +106,26 @@
 // -----------------------------------------------------------------------------
 
 
-@mixin shape-cross($color, $size, $width) {
+@mixin stool-shape-circle($color, $size) {
+	width           : $size;
+	height          : $size;
+	background-color: $color;
+	border-radius   : 50%;
+}
+
+@mixin stool-shape-circle-color($color) {
+	background-color: $color;
+}
+
+
+// -----------------------------------------------------------------------------
+
+
+@mixin stool-shape-cross($color, $size, $width) {
 	display: inline-block;
-	width: $size;
-	height: $size;
+	width  : $size;
+	height : $size;
+
 	position: relative;
 	&::before, &::after {
 		content: '';
@@ -135,22 +133,22 @@
 	}
 	&::before {
 		border-left: $width solid $color;
-		width: 2.25px;
-		height: 100%;
-		left: 50%;
-		transform: translateX(-50%);
+		width      : 2.25px;
+		height     : 100%;
+		left       : 50%;
+		transform  : translateX(-50%);
 	}
 	&::after {
 		border-top: $width solid $color;
-		width: 100%;
-		height: 2.25px;
-		top: 50%;
-		left: 0;
-		transform: translateY(-50%);
+		width     : 100%;
+		height    : 2.25px;
+		top       : 50%;
+		left      : 0;
+		transform : translateY(-50%);
 	}
 }
 
-@mixin shape-cross-color($color) {
+@mixin stool-shape-cross-color($color) {
 	&::before { border-left-color: $color; }
 	&::after { border-top-color: $color; }
 }

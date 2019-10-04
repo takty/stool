@@ -3,7 +3,7 @@
  * Fill Styles
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2018-01-11
+ * @version 2019-10-04
  *
  * @require stile/basic/layout.scss
  * @require stile/basic/query.scss
@@ -11,7 +11,7 @@
  */
 
 
-@mixin fill-full-width-strip($color) {
+@mixin stool-fill-full-width-strip($color) {
 	background-color: $color;
 	box-shadow: -33vw 0 0 $color, 33vw 0 0 $color;
 
@@ -19,19 +19,20 @@
 	@include for-ie {
 		position: relative;
 		&::after {
-			content: '';
+			content : '';
 			position: absolute;
-			left: -100vw;
-			width: 200vw;
-			top: 0;
-			bottom: 0;
+			left    : -100vw;
+			width   : 200vw;
+			top     : 0;
+			bottom  : 0;
+			z-index : -1;
+
 			background-color: $color;
-			z-index: -1;
 		}
 	}
 }
 
-@mixin fill-ken-burns($scale: 1.4, $time: 40s, $cover-color: transparent) {
+@mixin stool-fill-ken-burns($scale: 1.4, $time: 40s, $cover-color: transparent) {
 	overflow: hidden;
 
 	&::before, &::after {
@@ -40,14 +41,14 @@
 		@include layout-fill(absolute);
 	}
 	&::before {
-		background-size: cover;
+		background-size    : cover;
 		background-position: center center;
 
-		animation-name: zoom;
-		animation-delay: 0.4s;
-		animation-duration: $time;
+		animation-name           : zoom;
+		animation-delay          : 0.4s;
+		animation-duration       : $time;
 		animation-timing-function: ease-in-out;
-		animation-fill-mode: forwards;
+		animation-fill-mode      : forwards;
 	}
 	&::after {
 		background-color: $cover-color;
@@ -64,12 +65,13 @@
 // -----------------------------------------------------------------------------
 
 
-@mixin fill-stripe($color-bg, $color-pat, $size, $deg: 0deg, $rate: 25%) {
+@mixin stool-fill-stripe($color-bg, $color-pat, $size, $deg: 0deg, $rate: 25%) {
 	$tr: 50% - $rate;
-	background-size: $size $size;
-	background-color: $color-bg;
+
+	background-size  : $size $size;
+	background-color : $color-bg;
 	background-repeat: repeat;
-	background-image: linear-gradient($deg,
+	background-image : linear-gradient($deg,
 		$color-pat $rate, transparent $rate,
 		transparent #{$rate + $tr}, $color-pat #{$rate + $tr},
 		$color-pat #{$rate + $tr + $rate}, transparent #{$rate + $tr + $rate},
@@ -77,20 +79,20 @@
 	);
 }
 
-@mixin fill-dot-1($color-bg, $color-pat, $size: 40px, $rate: 15%) {
-	background-size: $size $size;
-	background-color: $color-bg;
-	background-repeat: repeat;
+@mixin stool-fill-dot-1($color-bg, $color-pat, $size: 40px, $rate: 15%) {
+	background-size    : $size $size;
+	background-color   : $color-bg;
+	background-repeat  : repeat;
 	background-position: 0 0;
-	background-image: radial-gradient($color-pat $rate, transparent #{$rate + 1});
+	background-image   : radial-gradient($color-pat $rate, transparent #{$rate + 1});
 }
 
-@mixin fill-dot-2($color-bg, $color-pat, $size: 40px, $rate: 15%) {
-	background-size: $size $size;
-	background-color: $color-bg;
-	background-repeat: repeat;
+@mixin stool-fill-dot-2($color-bg, $color-pat, $size: 40px, $rate: 15%) {
+	background-size    : $size $size;
+	background-color   : $color-bg;
+	background-repeat  : repeat;
 	background-position: 0 0, #{$size / 2} #{$size / 2};
-	background-image:
+	background-image   :
 		radial-gradient($color-pat $rate, transparent #{$rate + 1}),
 		radial-gradient($color-pat $rate, transparent #{$rate + 1});
 }

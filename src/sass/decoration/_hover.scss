@@ -3,70 +3,47 @@
  * Hover Styles
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2018-03-30
+ * @version 2019-10-04
  *
  */
 
 
-@charset 'utf-8';
+@mixin stool-hover-transition($prop: all, $time: 0.2s, $type: ease) {
+	transition: $prop $time $type;
+	&::before, &::after { transition: $prop $time $type; }
 
-
-@mixin hover-transition($prop: all, $time: 0.2s, $type: ease) {
-	transition-property: $prop;
-	transition-duration: $time;
-	transition-timing-function: $type;
-
-	&::before, &::after {
-		transition-property: $prop;
-		transition-duration: $time;
-		transition-timing-function: $type;
-	}
 	&:hover {
-		transition-property: $prop;
-		transition-duration: $time;
-		transition-timing-function: $type;
-
-		&::before, &::after {
-			transition-property: $prop;
-			transition-duration: $time;
-			transition-timing-function: $type;
-		}
+		transition: $prop $time $type;
+		&::before, &::after { transition: $prop $time $type; }
 	}
 }
 
-@mixin hover-pop($color, $width: 2px, $delta: 1px) {
-	@include hover-transition();
-	position: relative;
-	&:hover {
-		top: -#{$delta};
-		border-bottom: $width solid $color;
-	}
-}
-
-@mixin hover-flash($pseudo: after) {
+@mixin stool-hover-flash($pseudo: after) {
 	&:hover {
 		position: relative;
 		overflow: hidden;
 
 		&::#{$pseudo} {
-			content: '';
-			display: block;
-			position: absolute;
-			left: -200%;
-			top: 50%;
-			width: 100%;
-			padding-bottom: 400%;
-			background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0) 100%);
-			transform: translate(-50%, -50%) rotate(45deg);
-			animation: glow 0.75s 1 0s;
-			animation-timing-function: linear;
+			content       : '';
+			display       : block;
+			position      : absolute;
+			left          : -200%;
+			top           : 50%;
+			width         : 100%;
 			pointer-events: none;
+
+			padding-bottom: 400%;
+			background    : linear-gradient(to right, rgba(#fff, 0) 0%, rgba(#fff, 0.8) 50%, rgba(#fff, 0) 100%);
+			transform     : translate(-50%, -50%) rotate(45deg);
+
+			animation                : glow 0.75s 1 0s;
+			animation-timing-function: linear;
 		}
 	}
 
 	@keyframes glow {
-		0% { left: -200%; }
-		50% { left: 0%; }
-		100% { left: 200%; }
+		  0% { left: -200%; }
+		 50% { left:    0%; }
+		100% { left:  200%; }
 	}
 }
