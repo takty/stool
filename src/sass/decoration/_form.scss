@@ -3,25 +3,55 @@
  * Form Styles
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2019-07-04
+ * @version 2019-10-04
  *
  */
 
 
-@mixin form-selector-label($size, $color, $right) {
+@mixin stool-form-selector-label-1($size, $color, $right) {
 	position: relative;
 
-	&::before, &::after {
-		content: '';
-		display: block;
-		position: absolute;
-		border: #{$size / 3} solid transparent;
-		transition: all 0.2s ease;
+	&::after {
+		content       : '';
+		display       : block;
+		position      : absolute;
+		top           : 50%;
+		right         : $right;
+		width         : $size;
+		height        : $size;
+		z-index       : 1;
 		pointer-events: none;
 
-		top: 50%;
-		right: $right;
-		z-index: 1;
+		border-right : 2px solid $color;
+		border-bottom: 2px solid $color;
+
+		transition: all 0.2s ease;
+		transform : translate(50%, -75%) rotate(45deg);
+	}
+	&:hover {
+		transition: all 0.1s ease;
+		&::after {
+			transition: all 0.1s ease;
+			transform : scale(1, -1) translate(50%, 25%) rotate(45deg);
+		}
+	}
+}
+
+@mixin stool-form-selector-label-2($size, $color, $right) {
+	position: relative;
+
+	&::before,
+	&::after {
+		content       : '';
+		display       : block;
+		position      : absolute;
+		top           : 50%;
+		right         : $right;
+		z-index       : 1;
+		pointer-events: none;
+
+		border    : #{$size / 3} solid transparent;
+		transition: all 0.2s ease;
 	}
 	&::before {
 		border-top-color: $color;
@@ -35,11 +65,11 @@
 		transition: all 0.2s ease;
 		&::before {
 			transition: all 0.2s ease;
-			transform: translate(50%, -60%) scale(0.65, -1) translate(0, -25%) ;
+			transform : translate(50%, -60%) scale(0.65, -1) translate(0, -25%) ;
 		}
 		&::after {
 			transition: all 0.2s ease;
-			transform: translate(50%, -140%) scale(0.65, -1) translate(0, -75%) ;
+			transform : translate(50%, -140%) scale(0.65, -1) translate(0, -75%) ;
 		}
 	}
 }
