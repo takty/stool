@@ -3,7 +3,7 @@
  * Priority Menu (SCSS)
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2019-08-03
+ * @version 2019-10-04
  *
  * @import 'lib/stile/sass/basic/query';
  * @import 'lib/stile/sass/basic/layout';
@@ -12,8 +12,9 @@
  */
 
 
-$stool-priority-menu-color-bg          : #eee                          !default;
-$stool-priority-menu-color-bg-hover    : #fff                          !default;
+$stool-priority-menu-color-bg      : #eee                              !default;
+$stool-priority-menu-color-bg-hover: #fff                              !default;
+
 $stool-priority-menu-font-size-level   : 0                               !default;
 $stool-priority-menu-size-border-radius: 1.5px                           !default;
 $stool-priority-menu-padding-item      : 0.85rem 1rem                    !default;
@@ -62,12 +63,6 @@ $stool-priority-menu-popup-offset      : 0.25rem                         !defaul
 			line-height: 1;
 			white-space: nowrap;
 			@include font-size-level($stool-priority-menu-font-size-level, false);
-
-			background-color: $stool-priority-menu-color-bg;
-			&:hover {
-				text-decoration: underline;
-				background-color: $stool-priority-menu-color-bg-hover;
-			}
 		}
 	}
 
@@ -82,8 +77,6 @@ $stool-priority-menu-popup-offset      : 0.25rem                         !defaul
 			display       : block;
 			pointer-events: none;
 		}
-		background-color: $stool-priority-menu-color-bg;
-		&:hover { background-color: $stool-priority-menu-color-bg-hover; }
 	}
 
 	.stool-priority-menu-popup {
@@ -106,6 +99,8 @@ $stool-priority-menu-popup-offset      : 0.25rem                         !defaul
 				label, a {
 					display: block;
 					padding: $stool-priority-menu-popup-padding-item;
+
+					&:hover { background-color: $stool-priority-menu-color-bg-hover; }
 				}
 			}
 		}
