@@ -1,6 +1,6 @@
 {
   "name": "stool",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Utility Tools of Website Style",
   "author": "Takuto Yanagida",
   "main": "gulpfile.js",
