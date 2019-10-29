@@ -3,15 +3,17 @@
  * Sticky Header - scroll (JS)
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2019-07-12
+ * @version 2019-10-29
  *
  */
 
 
 document.addEventListener('DOMContentLoaded', function () {
 
-	const CLS_STICKY_ELM     = 'st-sticky-header';
-	const CLS_STICKY_ELM_TOP = 'st-sticky-header-top';
+	const CLS_STICKY_ELM          = 'st-sticky-header';
+	const CLS_STICKY_ELM_DISABLED = 'st-sticky-header-disabled';
+	const CLS_STICKY_ELM_TOP      = 'st-sticky-header-top';
+
 	const CLS_STATE_STICKY   = 'sticky';
 	const CLS_STATE_FLOATING = 'floating';
 
@@ -32,6 +34,9 @@ document.addEventListener('DOMContentLoaded', function () {
 	onScroll();
 
 	function setEnabled(flag) {
+		if (elmSticky.classList.contains(CLS_STICKY_ELM_DISABLED) && flag) elmSticky.classList.remove(CLS_STICKY_ELM_DISABLED);
+		else if (!elmSticky.classList.contains(CLS_STICKY_ELM_DISABLED) && !flag) elmSticky.classList.add(CLS_STICKY_ELM_DISABLED);
+
 		if (flag === isEnabled) return;
 		if (!flag) {
 			if (isFloating) turnOffFloating();
