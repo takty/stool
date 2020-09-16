@@ -1,3 +1,14 @@
+/**
+ *
+ * Gulpfile
+ *
+ * @author Takuto Yanagida @ Space-Time Inc.
+ * @version 2020-09-16
+ *
+ */
+
+
+/* eslint-disable no-undef */
 'use strict';
 
 const gulp = require('gulp');
@@ -30,12 +41,6 @@ gulp.task('default', gulp.series('build', 'watch'));
 
 // -----------------------------------------------------------------------------
 
-
-gulp.task('docs-lib', () => gulp.src(['node_modules/stile/dist/**/*'])
-	.pipe($.plumber())
-	.pipe($.rename((p) => { p.dirname = p.dirname.replace(path.sep + 'dist', ''); }))
-	.pipe(gulp.dest('./stile/'))
-);
 
 gulp.task('docs-sass', gulp.series('sass', () => gulp.src('docs/style.scss')
 	.pipe($.plumber())
