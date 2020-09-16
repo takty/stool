@@ -3,7 +3,7 @@
  * Sticky Header - fixed (JS)
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2019-10-29
+ * @version 2020-09-16
  *
  */
 
@@ -95,10 +95,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	function canEnabled() {
 		const FIXED_MIN_WINDOW_WIDTH = 600;  // for-tablet-up
-		const WINDOW_HEIGHT_RATE = 0.2;
+		const FIXED_MAX_WINDOW_HEIGHT_RATE = 0.2;
 
 		const fmww = (window.STOOL_FIXED_MIN_WINDOW_WIDTH !== undefined) ? window.STOOL_FIXED_MIN_WINDOW_WIDTH : FIXED_MIN_WINDOW_WIDTH;
 		if (window.innerWidth < fmww) return false;
+		const fmwhr = (window.STOOL_FIXED_MAX_WINDOW_HEIGHT_RATE !== undefined) ? window.STOOL_FIXED_MAX_WINDOW_HEIGHT_RATE : FIXED_MAX_WINDOW_HEIGHT_RATE;
+		if (window.innerHeight * fmwhr < elmStickyView.clientHeight) return false;
 
 		if (window.ST.BROWSER === 'safari') {
 			const ua = window.navigator.userAgent.toLowerCase();
@@ -113,8 +115,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				}
 			}
 		}
-		const h = elmStickyView.clientHeight;
-		return (h < window.innerHeight * WINDOW_HEIGHT_RATE);
+		return true;
 	}
 
 });
