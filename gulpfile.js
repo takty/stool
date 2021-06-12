@@ -3,7 +3,7 @@
  * Gulpfile
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2020-09-16
+ * @version 2021-06-12
  *
  */
 
@@ -42,14 +42,12 @@ gulp.task('default', gulp.series('build', 'watch'));
 // -----------------------------------------------------------------------------
 
 
-gulp.task('docs-sass', gulp.series('sass', () => gulp.src('docs/style.scss')
+gulp.task('docs-sass', gulp.series('sass', () => gulp.src('docs/style.scss', { sourcemaps: true })
 	.pipe($.plumber())
-	.pipe($.sourcemaps.init())
 	.pipe($.sass({ outputStyle: 'compressed' }))
 	.pipe($.autoprefixer({ remove: false }))
 	.pipe($.rename({ extname: '.min.css' }))
-	.pipe($.sourcemaps.write('.'))
-	.pipe(gulp.dest('./docs/css')))
+	.pipe(gulp.dest('./docs/css', { sourcemaps: '.' })))
 );
 
 gulp.task('docs-js', gulp.series('js', () => gulp.src([
