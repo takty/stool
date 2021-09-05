@@ -3,9 +3,12 @@
  * Shape Styles
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2019-10-04
+ * @version 2021-09-05
  *
  */
+
+
+@use "sass:math";
 
 
 @mixin stool-shape-triangle($color, $dir, $size) {
@@ -69,14 +72,14 @@
 
 
 @mixin stool-shape-angle($color, $dir, $size, $width) {
-	$r2: 1 / 1.4142125;
+	$r2: math.div(1, 1.4142125);
 	width : $size * $r2;
 	height: $size * $r2;
 
 	border-top : $width solid $color;
 	border-left: $width solid $color;
 
-	transform-origin: #{$size * $r2 / 2} #{$size * $r2/ 2};
+	transform-origin: #{math.div($size * $r2, 2)} #{math.div($size * $r2, 2)};
 	@if      $dir == top    { transform: rotate(  45deg); }
 	@else if $dir == left   { transform: rotate( -45deg); }
 	@else if $dir == right  { transform: rotate( 135deg); }

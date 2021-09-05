@@ -44,7 +44,7 @@ gulp.task('default', gulp.series('build', 'watch'));
 
 gulp.task('docs-sass', gulp.series('sass', () => gulp.src('docs/style.scss', { sourcemaps: true })
 	.pipe($.plumber())
-	.pipe($.sass({ outputStyle: 'compressed' }))
+	.pipe($.dartSass({ outputStyle: 'compressed' }))
 	.pipe($.autoprefixer({ remove: false }))
 	.pipe($.rename({ extname: '.min.css' }))
 	.pipe(gulp.dest('./docs/css', { sourcemaps: '.' })))

@@ -3,9 +3,12 @@
  * Form Styles
  *
  * @author Takuto Yanagida @ Space-Time Inc.
- * @version 2019-10-04
+ * @version 2021-09-05
  *
  */
+
+
+@use "sass:math";
 
 
 @mixin stool-form-selector-label-1($size, $color, $right) {
@@ -50,7 +53,7 @@
 		z-index       : 1;
 		pointer-events: none;
 
-		border    : #{$size / 3} solid transparent;
+		border    : #{math.div($size, 3)} solid transparent;
 		transition: all 0.2s ease;
 	}
 	&::before {
